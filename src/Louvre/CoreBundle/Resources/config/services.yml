@@ -1,0 +1,4 @@
+services:
+#    louvre_core.example:
+#        class: Louvre\CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

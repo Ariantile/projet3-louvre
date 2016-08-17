@@ -1,0 +1,58 @@
+@blanc: #FFFFFF;
+@noir: #000000;
+
+#horraires
+{
+    color: @noir;
+    text-align: left;
+    font-family: Sitka Display;
+    font-size: 150%;
+}
+
+#headAccueil
+{
+    min-height: 960px;
+    width: 100%;
+    background-color: @blanc;
+    background: url(../images/fond_accueil.png) no-repeat top center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+@media (max-width: 1280px) {
+    
+    #headAccueil
+    {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 768px;  
+    }
+    
+    #horraires
+    {
+        font-size: 80%;
+    }
+    
+}
+
+@media (max-width: 767px) {
+    
+    #headAccueil
+    {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 480px;
+    }
+    
+    #horraires
+    {
+        font-size: 80%;
+    }
+    
+}

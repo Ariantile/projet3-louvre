@@ -1,0 +1,8 @@
+# src/Louvre/CoreBundle/resources/config/routing.yml
+
+louvre_core_homepage:
+    path:     /
+    defaults: 
+        _controller: LouvreCoreBundle:Core:index
+    
+

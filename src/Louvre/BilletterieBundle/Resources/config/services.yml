@@ -1,0 +1,4 @@
+services:
+#    louvre_billetterie.example:
+#        class: Louvre\BilletterieBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

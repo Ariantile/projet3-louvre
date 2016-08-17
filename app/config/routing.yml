@@ -1,3 +1,11 @@
+louvre_billetterie:
+    resource: "@LouvreBilletterieBundle/Resources/config/routing.yml"
+    prefix:   /
+
+louvre_core:
+    resource: "@LouvreCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
