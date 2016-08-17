@@ -4,21 +4,27 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        main:
+            id: fos_user.user_provider.username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(wdt)|css|images|js)/
             security: false
 
         main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            pattern:      ^/
+            anonymous:    true
+            provider:     main
+            form_login:
+                login_path: login
+                check_path: login_check
+            logout:
+                path:       logout
+                target:     /administration
+            remember_me:
+                secret:     %secret% # %secret% est un paramètre de parameter
+    
+    encoders:
+        Louvre\UserBundle\Entity\User: sha512

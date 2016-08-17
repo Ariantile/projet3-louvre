@@ -35,8 +35,9 @@
         "stof/doctrine-extensions-bundle": "~1.2.2",
         "nelmio/api-doc-bundle": "~2.13.0",
         "symfony/assetic-bundle": "~2.8",
-        "coresphere/console-bundle": "0.4.0",
-        "sonata-project/admin-bundle": "3.4.0"
+        "coresphere/console-bundle": "~0.4.0",
+        "sonata-project/admin-bundle": "~3.4.0",
+        "sonata-project/doctrine-orm-admin-bundle": "~3.0.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
