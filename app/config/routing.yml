@@ -1,18 +1,9 @@
-louvre_user:
-    resource: "@LouvreUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 louvre_billetterie:
     resource: "@LouvreBilletterieBundle/Resources/config/routing.yml"
     prefix:   /
 
 louvre_core:
     resource: "@LouvreCoreBundle/Resources/config/routing.yml"
-    prefix:   /
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -32,3 +23,5 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+    
+
