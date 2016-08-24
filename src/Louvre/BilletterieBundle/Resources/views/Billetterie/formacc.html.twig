@@ -1,0 +1,7 @@
+{% for tarif in listTarifs %}
+    <div>
+        {{ tarif.id }} - {{ tarif.nomtarif }} : {{ tarif.prix }}€ 
+        <p>{{ tarif.description }}</p>
+    </div>
+    <br>
+{% endfor %}

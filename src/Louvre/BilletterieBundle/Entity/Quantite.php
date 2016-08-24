@@ -57,7 +57,7 @@ class Quantite
     {
         return $this->commande;
     }
-        
+             
     public function getTarifs()
     {
         return $this->tarifs;
@@ -118,6 +118,8 @@ class Quantite
      */
     public function getTotal()
     {
+        $this->tarifs->getPrix() * $this->qte;
+        
         return $this->total;
     }
 }

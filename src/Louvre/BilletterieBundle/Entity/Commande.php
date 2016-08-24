@@ -72,6 +72,7 @@ class Commande
     
     public function __construct()
     {
+        $this->dateCommande = new \Datetime();
         $this->quantites = new ArrayCollection();
     }
 

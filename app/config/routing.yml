@@ -1,10 +1,10 @@
-louvre_billetterie:
-    resource: "@LouvreBilletterieBundle/Resources/config/routing.yml"
-    prefix:   /
-
 louvre_core:
     resource: "@LouvreCoreBundle/Resources/config/routing.yml"
+    prefix:   /
     
+louvre_billetterie_paiement:
+    resource: "@LouvreBilletterieBundle/Resources/config/routing.yml"
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

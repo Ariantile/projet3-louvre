@@ -8,9 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CoreController extends Controller
 {
-  public function indexAction()
-  {
-    return $this->render('LouvreCoreBundle:Core:index.html.twig');
-  }
-
+    public function indexAction()
+    {
+        return $this->render('LouvreCoreBundle:Core:index.html.twig');
+    }
 }

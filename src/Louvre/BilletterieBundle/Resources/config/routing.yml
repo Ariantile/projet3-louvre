@@ -1,0 +1,6 @@
+# src/Louvre/BilletterieBundle/Resources/config/routing.yml
+
+louvre_billetterie_paiement:
+    path:     /paiement
+    defaults: 
+        _controller: LouvreBilletterieBundle:Billetterie:paiement

@@ -10,4 +10,20 @@ namespace Louvre\BilletterieBundle\Repository;
  */
 class TarifsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findTarifs($nomtarif, $description, $prix)
+    {
+        $qb = $this->createQueryBuilder('t');
+
+        $qb
+        ->where('t.nomtarif = :nomtarif')
+        ->setParameter('nomtarif', $nomtarif)
+        ->andWhere('t.description = :description')
+        ->setParameter('description', $description)
+        ->andWhere('t.prix = :prix')
+        ->setParameter('prix', $prix);
+
+        return $qb
+        ->getQuery()
+        ->getResult();
+    }
 }
