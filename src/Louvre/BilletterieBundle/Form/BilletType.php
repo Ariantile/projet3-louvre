@@ -5,6 +5,9 @@ namespace Louvre\BilletterieBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class BilletType extends AbstractType
 {
@@ -15,10 +18,16 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateReservation', 'date')
-            ->add('nomBillet')
-            ->add('prenomBillet')
-            ->add('naissanceBillet', 'date')
+            ->add('nomBillet', TextType::class)
+            ->add('prenomBillet', TextType::class)
+            ->add('paysBillet', CountryType::class)
+            ->add('naissanceBillet', 'date', array(
+                  'widget'      => 'single_text',
+                  'input'       => 'datetime',
+                  'format'      => 'dd/MM/yyyy',
+                  'attr'        => array(
+                  'class'       => 'date',
+                  'placeholder' => 'jj/mm/aaaa'),))
         ;
     }
     

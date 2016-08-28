@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Payum\Bundle\PayumBundle\PayumBundle(),
             
             // SonataAdminBundle
             new Sonata\CoreBundle\SonataCoreBundle(),

@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block header %}
+<div id="headAccueil" class="container">
     <div class="row" id="secuHorraire">
         <div class="col-sm-4 col-md-3" id="horraire">
             <h2>Horraires d'ouverture</h2>
@@ -18,6 +19,7 @@
             après avoir été contrôlés.</p>
         </div>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +32,7 @@
                 </p>
             </div>
             <div class="col-md-4" id="bouttonFleche">
-                <a href="">Vers la billetterie</a>
+                <a href="#ancreFormAcc">Vers la billetterie</a>
             </div>
             <div class="col-md-4 paiement">
                 <h2>Moyen de paiement</h2>
@@ -48,7 +50,9 @@
     {% for message in app.session.flashbag.get('info') %}
         <div class="alert alert-info">Message flash : {{ message }}</div>
     {% endfor %}
- 
-{{ render(controller("LouvreBilletterieBundle:Billetterie:formacc")) }}
+    
+    <div id="ancreFormAcc" class="container">
+        {{ render(controller("LouvreBilletterieBundle:Billetterie:formacc")) }}
+    </div>
           
 {% endblock %}

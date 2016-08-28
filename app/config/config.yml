@@ -40,6 +40,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -100,3 +102,23 @@ sonata_block:
         #    templates:
         #       - { name: 'Simple', template: 'AcmeDemoBundle:Block:demo_simple.html.twig' }
         #       - { name: 'Big',    template: 'AcmeDemoBundle:Block:demo_big.html.twig' }
+        
+payum:
+    security:
+        token_storage:
+            Louvre\BilletterieBundle\Entity\PaymentToken: { doctrine: orm }
+            
+    storages:
+        Louvre\BilletterieBundle\Entity\Payment: { doctrine: orm }
+        
+    gateways:
+        louvre_paypal_checkout:
+            factory: paypal_express_checkout
+            username: ariantile-facilitator_api1.hotmail.com
+            password: 42LBD5Z2SD8Z5AYH
+            signature: AqmQnsd4h7OsVndgR0AjQNmnnpJBArBcFfkLHCkJSk9CIxONDJL9bx4W
+            sandbox: true
+        louvre_stripe_checkout:
+            factory: stripe_checkout
+            publishable_key: pk_test_SWKJLqWs1X8sbc9u2IK2MNOs
+            secret_key: sk_test_nm7TBSl1DNWaXjQdfkzPtM3s

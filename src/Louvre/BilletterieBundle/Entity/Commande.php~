@@ -59,7 +59,7 @@ class Commande
      *
      * @ORM\Column(name="demi_journee", type="boolean")
      */
-    private $demiJournee;
+    private $demiJourneee;
     
     /**
      * @var int
@@ -284,29 +284,5 @@ class Commande
     public function getBillets()
     {
         return $this->billets;
-    }
-
-    /**
-     * Set demiJournee
-     *
-     * @param boolean $demiJournee
-     *
-     * @return Commande
-     */
-    public function setDemiJournee($demiJournee)
-    {
-        $this->demiJournee = $demiJournee;
-
-        return $this;
-    }
-
-    /**
-     * Get demiJournee
-     *
-     * @return boolean
-     */
-    public function getDemiJournee()
-    {
-        return $this->demiJournee;
     }
 }

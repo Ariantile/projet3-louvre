@@ -9,6 +9,7 @@
         <title>{% block title %}Billeterie du musée du Louvre{% endblock %}</title>
 
         {% block stylesheets %}
+            <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="{{ asset('bundles/louvrecore/css/style.css') }}"/>
         {% endblock %}
@@ -16,19 +17,18 @@
 
     <body>
        
-    <header id="headAccueil">
-       
-        <div class="container bloc-head">
-                        
+    <header>
+        <div class="container bloc-head">      
             <div class="row">
                 <div class="col-md-offset-10 col-md-2 traduction">
                     <img src="{{ asset('bundles/louvrecore/images/fr.png') }}" alt="Traduction française" class="drapfr"/>
                     <img src="{{ asset('bundles/louvrecore/images/gb.png') }}" alt="Traduction anglaise" />
                 </div>
             </div>
-            {% block header %}
-            {% endblock %}        
         </div>
+        
+        {% block header %}
+        {% endblock %}
 
    </header>
    
@@ -44,8 +44,10 @@
     </footer>
 
     {% block javascripts %}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="{{ asset('bundles/louvrecore/javascript/script.js') }}"/></script>
     {% endblock %}
 
   </body>

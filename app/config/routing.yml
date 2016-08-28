@@ -2,7 +2,7 @@ louvre_core:
     resource: "@LouvreCoreBundle/Resources/config/routing.yml"
     prefix:   /
     
-louvre_billetterie_paiement:
+louvre_billetterie:
     resource: "@LouvreBilletterieBundle/Resources/config/routing.yml"
 
 fos_user_security:
@@ -23,5 +23,8 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+    
+payum_capture:
+    resource: "@PayumBundle/Resources/config/routing/capture.xml"
     
 

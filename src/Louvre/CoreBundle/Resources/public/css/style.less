@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------*/
 
 @blanc: #FFFFFF;
-@textnoir: #000000;
+@noir: #000000;
 
 /*------------------------------------------------------------------------
 ---------------------- FONCTION LESS -------------------------------------
@@ -30,11 +30,12 @@ body
 .bloc-head
 {
     width: 100%;
+    background-color: @noir;
 }
 
 #horraires
 {
-    color: @textnoir;
+    color: @noir;
     text-align: left;
     font-size: 150%;
 }
@@ -58,7 +59,8 @@ body
 
 .traduction
 {
-    margin-top: 15px;
+    margin-top: 5px;
+    padding-bottom: 5px;
     
     img
     {
@@ -124,7 +126,45 @@ body
 {
     max-width: 300px; 
     float: right;
+    
+    h2
+    {
+        vertical-align: top;
+        margin-top: 0px;
+    }
+    
 }
+
+/*-----------------------------------------------
+---------- Formulaires --------------------------
+-----------------------------------------------*/
+
+.affix 
+{
+    top: 20px;
+    min-width: 365px;
+}
+
+#dateConnexion
+{
+    display: none;
+}
+
+#heureConnexion
+{
+    display: none;
+}
+
+.formulaireCoor
+{
+    max-width: 500px;
+}
+
+.blocUnBillet
+{
+    background-color: @blanc;
+}
+
 
 /*------------------------------------------------------------------------
 ---------------------- MEDIA QUERIES -------------------------------------

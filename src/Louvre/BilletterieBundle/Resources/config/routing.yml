@@ -1,6 +1,26 @@
 # src/Louvre/BilletterieBundle/Resources/config/routing.yml
 
+louvre_billetterie_coordonnees:
+    path:   /coordonnees
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:coordonnees
+
 louvre_billetterie_paiement:
-    path:     /paiement
+    path:    /paiement
     defaults: 
         _controller: LouvreBilletterieBundle:Billetterie:paiement
+        
+louvre_stripe:
+    path:   /paiement/stripe
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:prepareStripe
+    
+louvre_paypal_express_checkout:
+    path:   /paiement/paypal
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:preparePaypal
+        
+louvre_payment_done:
+    path:   /paiement/remerciement
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:done
