@@ -1,4 +1,4 @@
-{# src/CoreBundle/Resources/views/layout.html.twig #}
+{# src/BilletterieBundle/Resources/views/layout.html.twig #}
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,7 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{{ asset('bundles/louvrecore/css/style.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('bundles/louvrebilletterie/css/style.css') }}"/>
         {% endblock %}
     </head>
 
@@ -21,8 +21,8 @@
         <div class="container bloc-head">      
             <div class="row">
                 <div class="col-md-offset-10 col-md-2 traduction">
-                    <img src="{{ asset('bundles/louvrecore/images/fr.png') }}" alt="Traduction française" class="drapfr"/>
-                    <img src="{{ asset('bundles/louvrecore/images/gb.png') }}" alt="Traduction anglaise" />
+                    <img src="{{ asset('bundles/louvrebilletterie/images/fr.png') }}" alt="Traduction française" class="drapfr"/>
+                    <img src="{{ asset('bundles/louvrebilletterie/images/gb.png') }}" alt="Traduction anglaise" />
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="{{ asset('bundles/louvrecore/javascript/script.js') }}"/></script>
+        <script src="{{ asset('bundles/louvrebilletterie/javascript/script.js') }}"/></script>
     {% endblock %}
 
   </body>

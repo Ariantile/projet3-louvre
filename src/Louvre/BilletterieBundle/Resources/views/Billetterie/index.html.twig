@@ -1,4 +1,4 @@
-{% extends "LouvreCoreBundle::layout.html.twig" %}
+{% extends "LouvreBilletterieBundle:Billetterie:layout.html.twig" %}
 
 {% block title %}
   Page d'accueil - {{ parent() }}
@@ -37,10 +37,10 @@
             <div class="col-md-4 paiement">
                 <h2>Moyen de paiement</h2>
                 <div class="carte">
-                    <img src="{{ asset('bundles/louvrecore/images/cbvisa.png') }}" alt="Visa" />
-                    <img src="{{ asset('bundles/louvrecore/images/cbmaster.png') }}" alt="Master card" />
-                    <img src="{{ asset('bundles/louvrecore/images/cbamerican.png') }}" alt="American express" />
-                    <img src="{{ asset('bundles/louvrecore/images/cbpaypal.jpg') }}" alt="Paypal" class="icoPaypal"/>
+                    <img src="{{ asset('bundles/louvrebilletterie/images/cbvisa.png') }}" alt="Visa" />
+                    <img src="{{ asset('bundles/louvrebilletterie/images/cbmaster.png') }}" alt="Master card" />
+                    <img src="{{ asset('bundles/louvrebilletterie/images/cbamerican.png') }}" alt="American express" />
+                    <img src="{{ asset('bundles/louvrebilletterie/images/cbpaypal.jpg') }}" alt="Paypal" class="icoPaypal"/>
                 </div>
             </div>
         </div>
@@ -52,7 +52,9 @@
     {% endfor %}
     
     <div id="ancreFormAcc" class="container">
-        {{ render(controller("LouvreBilletterieBundle:Billetterie:formacc")) }}
+        {% block form %}
+
+        {% endblock %}
     </div>
           
 {% endblock %}

@@ -1,7 +1,8 @@
 # src/Louvre/BilletterieBundle/Resources/config/routing.yml
 
-louvre_billetterie_formacc:
-    defaults:
+louvre_core_homepage:
+    path:     /
+    defaults: 
         _controller: LouvreBilletterieBundle:Billetterie:formacc
 
 louvre_billetterie_validation:

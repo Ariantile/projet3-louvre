@@ -6,6 +6,9 @@ namespace Louvre\BilletterieBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Extra;
 use Louvre\BilletterieBundle\Entity\Quantite;
 use Louvre\BilletterieBundle\Entity\Tarifs;
@@ -48,7 +51,7 @@ class BilletterieController extends Controller
         
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             
-                $session->set('dateReservation', $commande->getDateReservation());
+                /*$session->set('dateReservation', $commande->getDateReservation());
                 $session->set('qte', $commande->getQte());
                 $session->set('sousTotal', $commande->getSousTotal());
                 $session->set('billets', $commande->getBillets());
@@ -58,7 +61,8 @@ class BilletterieController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($commande);
                 
-                $session->getFlashBag()->add('message', 'Test submit.');
+                $session->getFlashBag()->add('message', 'Test submit.');*/
+                var_dump($form->getData());die;
                 
             return $this->redirectToRoute('louvre_billetterie_validation');
         }
@@ -72,14 +76,14 @@ class BilletterieController extends Controller
     
     public function validationAction()
     {
-        $session = $this->getRequest()->getSession();
+        /*$session = $this->get('session');
         
         $dateReservation = $session->get('dateReservation');
         $demiJournee = $session->get('demiJournee');
         $qte = $session->get('qte'); 
         $sousTotal = $session->get('sousTotal');
         $billets = $session->get('billets');
-        $facturation = $session->get('facturation');
+        $facturation = $session->get('facturation');*/
          
         return $this->render('LouvreBilletterieBundle:Billetterie:validation.html.twig');
     }

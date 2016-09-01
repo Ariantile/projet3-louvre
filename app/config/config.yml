@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@LouvreCoreBundle/Resources/config/services.yml" }
     - { resource: "@LouvreBilletterieBundle/Resources/config/services.yml" }
     - { resource: "@LouvreUserBundle/Resources/config/services.yml" }
 
