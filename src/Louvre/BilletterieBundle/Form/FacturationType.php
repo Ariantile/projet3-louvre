@@ -29,7 +29,7 @@ class FacturationType extends AbstractType
                   'input'       => 'datetime',
                   'format'      => 'dd/MM/yyyy',
                   'attr'        => array(
-                  'class'       => 'date',
+                  'class'       => 'dateFacturation',
                   'placeholder' => 'jj/mm/aaaa'),))
             ->add('courriel', RepeatedType::class, array(
                   'type'            => EmailType::class,

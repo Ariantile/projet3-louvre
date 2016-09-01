@@ -25,6 +25,10 @@ class Facturation
      * @var string
      *
      * @ORM\Column(name="nom_facture", type="string", length=255)
+     * @Assert\length(
+     *      min = 2,
+     *      max = 30
+     * )
      */
     private $nomFacture;
 
@@ -32,6 +36,10 @@ class Facturation
      * @var string
      *
      * @ORM\Column(name="prenom_facture", type="string", length=255)
+     * @Assert\length(
+     *      min = 2,
+     *      max = 30
+     * )
      */
     private $prenomFacture;
 
@@ -39,6 +47,7 @@ class Facturation
      * @var string
      *
      * @ORM\Column(name="pays", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $pays;
 
@@ -46,6 +55,7 @@ class Facturation
      * @var \DateTime
      *
      * @ORM\Column(name="naissance_facture", type="date")
+     * @Assert\Date()
      */
     private $naissanceFacture;
 
@@ -53,6 +63,7 @@ class Facturation
      * @var string
      *
      * @ORM\Column(name="courriel", type="string", length=255)
+     * @Assert\Email(checkMX = true) 
      */
     private $courriel;
 

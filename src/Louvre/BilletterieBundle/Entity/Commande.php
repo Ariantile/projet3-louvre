@@ -4,6 +4,8 @@ namespace Louvre\BilletterieBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Commande
@@ -16,14 +18,16 @@ class Commande
     /**
      * @ORM\OneToOne(targetEntity="Louvre\BilletterieBundle\Entity\Facturation", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\Valid()
      */
     private $facturation;
     
     /**
      * @ORM\OneToMany(targetEntity="Louvre\BilletterieBundle\Entity\Billet", mappedBy="commande")
+     * @Assert\Valid()
      */
     private $billets;
-    
+       
     /**
      * @var int
      *
@@ -44,6 +48,7 @@ class Commande
      * @var \DateTime
      *
      * @ORM\Column(name="date_commande", type="datetime")
+     * @Assert\DateTime()
      */
     private $dateCommande;
 
@@ -51,6 +56,7 @@ class Commande
      * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="date")
+     * @Assert\Date()
      */
     private $dateReservation;
     
@@ -65,6 +71,10 @@ class Commande
      * @var int
      *
      * @ORM\Column(name="qte", type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 9
+     * )
      */
     private $qte;
     
@@ -72,6 +82,9 @@ class Commande
      * @var string
      *
      * @ORM\Column(name="sous_total", type="decimal", precision=10, scale=2)
+     * @Assert\Range(
+     *      min = 4
+     * )
      */
     private $sousTotal;
 

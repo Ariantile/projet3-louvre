@@ -29,25 +29,59 @@ use Payum\Stripe\Request\Api\CreatePlan;
 
 class BilletterieController extends Controller
 {
-    public function formaccAction()
+    public function formaccAction(Request $request)
     {        
+        $commande = new Commande();
+        
+        $session = $this->get('session');
+                
         $repository = $this
         ->getDoctrine()
         ->getManager()
         ->getRepository('LouvreBilletterieBundle:Tarifs');
 
         $listTarifs = $repository->findAll();
-
-        $commande = new Commande();
-        $formCommande = $this->get('form.factory')->create(CommandeType::class, $commande);
         
         $date = new \DateTime('now');
+
+        $form = $this->get('form.factory')->create(CommandeType::class, $commande);
+        
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            
+                $session->set('dateReservation', $commande->getDateReservation());
+                $session->set('qte', $commande->getQte());
+                $session->set('sousTotal', $commande->getSousTotal());
+                $session->set('billets', $commande->getBillets());
+                $session->set('facturation', $commande->getFacturation());
+                $session->set('demiJournee', $commande->getDemiJournee());
+            
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($commande);
+                
+                $session->getFlashBag()->add('message', 'Test submit.');
+                
+            return $this->redirectToRoute('louvre_billetterie_validation');
+        }
         
         return $this->render('LouvreBilletterieBundle:Billetterie:formacc.html.twig', array(
-                'formcommande'  => $formCommande->createView(),
+                'formcommande'  => $form->createView(),
                 'listTarifs'    => $listTarifs,
                 'dateConnexion' => $date,
         ));
+    }
+    
+    public function validationAction()
+    {
+        $session = $this->getRequest()->getSession();
+        
+        $dateReservation = $session->get('dateReservation');
+        $demiJournee = $session->get('demiJournee');
+        $qte = $session->get('qte'); 
+        $sousTotal = $session->get('sousTotal');
+        $billets = $session->get('billets');
+        $facturation = $session->get('facturation');
+         
+        return $this->render('LouvreBilletterieBundle:Billetterie:validation.html.twig');
     }
     
     public function coordonneesAction(Request $request)

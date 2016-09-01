@@ -44,6 +44,10 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="nom_billet", type="string", length=255)
+     * @Assert\length(
+     *      min = 2,
+     *      max = 30
+     * )
      */
     private $nomBillet;
 
@@ -51,6 +55,10 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="prenom_billet", type="string", length=255)
+     * @Assert\length(
+     *      min = 2,
+     *      max = 30
+     * )
      */
     private $prenomBillet;
 
@@ -58,6 +66,7 @@ class Billet
      * @var \DateTime
      *
      * @ORM\Column(name="naissance_billet", type="date")
+     * @Assert\Date()
      */
     private $naissanceBillet;
     
@@ -65,6 +74,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="pays_billet", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $paysBillet;
 

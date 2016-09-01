@@ -27,10 +27,11 @@
             <p>Type de billet(s) : <span id="typeBillet">Aucun type de billet selectionné.</span></p>
             <p>Nombre de personne : <span id="nbPersonne">Aucun billet ajouté au panier.</span></p>
             <p id="panierBillets"></p>
-            <p id="totalPanier"></p>
-            <input type="submit" id="subForm" class="btn btn-warning"></input>
+            <p id="affichageTotalPanier"></p>
+            <input id="totalPanier" type="number" disabled>
+            <form action="{{ path('louvre_core_homepage') }}" method="post">
+                <input name="Valider" type="submit" id="subForm" class="btn btn-warning">
+            </form> 
         </div>
     </div> 
-    
 </div>
-

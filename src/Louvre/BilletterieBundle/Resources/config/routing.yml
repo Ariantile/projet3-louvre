@@ -1,9 +1,13 @@
 # src/Louvre/BilletterieBundle/Resources/config/routing.yml
 
-louvre_billetterie_coordonnees:
-    path:   /coordonnees
+louvre_billetterie_formacc:
     defaults:
-        _controller: LouvreBilletterieBundle:Billetterie:coordonnees
+        _controller: LouvreBilletterieBundle:Billetterie:formacc
+
+louvre_billetterie_validation:
+    path:   /validation
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:validation
 
 louvre_billetterie_paiement:
     path:    /paiement
