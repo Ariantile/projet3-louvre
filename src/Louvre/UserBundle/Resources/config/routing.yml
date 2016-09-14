@@ -1,3 +1,0 @@
-louvre_user_homepage:
-    path:     /administration
-    defaults: { _controller: LouvreUserBundle:index }

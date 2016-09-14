@@ -10,4 +10,21 @@ namespace Louvre\BilletterieBundle\Repository;
  */
 class BilletRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCommande ($idCommande){
+        
+        $qb = $this
+            ->createQueryBuilder('b')
+            ->innerJoin('b.commande', 'com')
+            ->innerJoin('com.facturation', 'fac')
+            ->addSelect('com')
+            ->addSelect('fac')
+            ->where('b.commande = :idCommande')
+            ->setParameter('idCommande', $idCommande);
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+        
+        
+    }    
 }

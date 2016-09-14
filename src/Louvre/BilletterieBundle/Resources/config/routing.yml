@@ -19,11 +19,6 @@ louvre_stripe:
     path:   /paiement/stripe
     defaults:
         _controller: LouvreBilletterieBundle:Billetterie:prepareStripe
-    
-louvre_paypal_express_checkout:
-    path:   /paiement/paypal
-    defaults:
-        _controller: LouvreBilletterieBundle:Billetterie:preparePaypal
         
 louvre_payment_done:
     path:   /paiement/remerciement

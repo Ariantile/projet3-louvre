@@ -20,26 +20,59 @@
     <header>
         <div class="container bloc-head">      
             <div class="row">
-                <div class="col-md-offset-10 col-md-2 traduction">
+                <div class="col-sm-5 col-xs-12 logoTitre">
+                    <p>Louvre Billetterie</p>
+                </div>
+                <div class="col-sm-7 col-xs-12 traduction">
                     <img src="{{ asset('bundles/louvrebilletterie/images/fr.png') }}" alt="Traduction française" class="drapfr"/>
                     <img src="{{ asset('bundles/louvrebilletterie/images/gb.png') }}" alt="Traduction anglaise" />
+                    <button id="btPanier" type="button">
+                        <span id="icoPanier" class="glyphicon glyphicon-shopping-cart"></span>
+                    </button>
                 </div>
             </div>
         </div>
-        
-        {% block header %}
-        {% endblock %}
-
    </header>
    
     <section>
-            {% block content %}
-            {% endblock %}
+        {% block header %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
     </section>
 
-    <footer class="container">
-       <div class="row">
-            <p>Musée du Louvre© {{ 'now'|date('Y') }}.</p>
+    <footer>
+        <div class="container contFooter">
+            <div class="row topFooter">
+                <div class="col-sm-6 col-xs-12">
+                    <p>
+                        Billet perdu ? Indiquez l'adresse courriel utilisée lors de votre achat,
+                        un nouveau courriel vous sera envoyé contenant vos billets.
+                    </p>
+                </div>
+                <div class="col-sm-6 col-xs-12 paiement">
+                    <h2>Moyen de paiement</h2>
+                    <div class="carte">
+                        <img src="{{ asset('bundles/louvrebilletterie/images/cbvisa.png') }}" alt="Visa" />
+                        <img src="{{ asset('bundles/louvrebilletterie/images/cbmaster.png') }}" alt="Master card" />
+                        <img src="{{ asset('bundles/louvrebilletterie/images/cbamerican.png') }}" alt="American express" />
+                        <img src="{{ asset('bundles/louvrebilletterie/images/cbpaypal.jpg') }}" alt="Paypal" class="icoPaypal"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row CgvMentions">
+                <div class="col-xs-6">
+                    <a href="#">Mentions légales</a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="#" class="cgv">Conditions générales de vente</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="copy">Musée du Louvre© {{ 'now'|date('Y') }}.</p>
+                </div>
+            </div>
         </div>
     </footer>
 

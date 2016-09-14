@@ -4,14 +4,70 @@
 
 @blanc: #FFFFFF;
 @noir: #000000;
+@gris: #808080;
+@boutonHover: #b5daf6;
+@champVide: #F68984;
+@topFooter: #292929;
 
 /*------------------------------------------------------------------------
 ---------------------- FONCTION LESS -------------------------------------
 ------------------------------------------------------------------------*/
 
+.valeursPanier
+{
+    font-weight: bold;    
+}
+
 .liens
 {
     text-decoration: none;
+}
+
+.boxStep
+{
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btNetB
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: @blanc;
+    color: @noir;
+    border: 1px solid @gris;
+    border-radius: 2px;
+    .shadowMin;
+    width: 83px;
+}
+
+.btBillet
+{
+    background-color: @blanc;
+    color: @noir;
+    border: 1px solid @gris;
+    border-radius: 2px;
+}
+
+.shadow
+{
+    -moz-box-shadow: 2px 2px 5px 0px #656565;
+    -webkit-box-shadow: 2px 2px 5px 0px #656565;
+    -o-box-shadow: 2px 2px 5px 0px #656565;
+    box-shadow: 2px 2px 5px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=5);
+}
+
+.shadowMin
+{
+    -moz-box-shadow: 1px 1px 5px 0px #656565;
+    -webkit-box-shadow: 1px 1px 5px 0px #656565;
+    -o-box-shadow: 1px 1px 5px 0px #656565;
+    box-shadow: 1px 1px 5px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=5);
 }
 
 /*------------------------------------------------------------------------
@@ -21,6 +77,12 @@
 body
 {
     font-family: Sitka Display;
+    background-color: @noir;
+}
+
+a:hover
+{
+    text-decoration: none;
 }
 
 /*------------------------------------------------------------------------
@@ -42,7 +104,7 @@ body
 
 #headAccueil
 {
-    min-height: 800px;
+    min-height: 767px;
     width: 100%;
     background-color: @blanc;
     background: url(../images/fond_accueil.png) no-repeat top center;
@@ -53,14 +115,28 @@ body
     border-bottom: 1px solid black;
 }
 
+#secuHorraire
+{
+    text-align: justify;
+}
+
 /*-----------------------------------------------
 ---------- BLOC TRADUCTION ----------------------
 -----------------------------------------------*/
 
+.logoTitre
+{
+    color: @blanc;
+    font-size: 20px;
+    padding-top: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    max-height: 25px;
+}
+
 .traduction
 {
     margin-top: 5px;
-    padding-bottom: 5px;
     
     img
     {
@@ -72,45 +148,6 @@ body
 .drapfr
 {
     padding-left: 15px;    
-}
-
-/*------------------------------------------------------------------------
----------------------- ACCUEIL FLECHE ------------------------------------
-------------------------------------------------------------------------*/
-
-.blocFleche
-{
-    width: 100%;
-}
-
-
-
-#bouttonFleche
-{
-    a
-    {
-        .liens;
-        display: block;
-        text-align: center;
-        background: url(../images/fleche.png) no-repeat top center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        height: 105px;
-        width: 175px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    a:hover
-    {
-        background: url(../images/flechenoire.png) no-repeat top center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
 }
 
 /*-----------------------------------------------
@@ -129,25 +166,198 @@ body
     
     h2
     {
+        text-align: right;
         vertical-align: top;
         margin-top: 0px;
     }
     
 }
 
+
+/*-----------------------------------------------
+---------- Step ---------------------------------
+-----------------------------------------------*/
+
+#step
+{
+    height: 50px;
+    text-align: center;
+    font-size: 35px;
+    font-family: arial; 
+}
+
+#step1
+{
+    .boxStep;
+    .shadow;
+}
+
+#step2
+{
+    .boxStep;
+    .shadow;
+}
+
+#step3
+{
+    .boxStep;
+    .shadow;
+}
+
+#step4
+{
+    .boxStep;
+    .shadow;
+}
+
+.stepActuOn 
+{
+    background-color: @noir;
+    color: @blanc;
+    border: 2px solid @blanc;
+}
+
+.stepActuOff 
+{
+    background-color: @blanc;
+    color: @noir;
+    border: 2px solid @noir;
+}
+
 /*-----------------------------------------------
 ---------- Formulaires --------------------------
 -----------------------------------------------*/
+
+button:disabled
+{
+    opacity: 0.5;  
+}
 
 #ancreFormAcc
 {
     margin-top: 40px;
 }
 
-.affix 
+#bloc_form
 {
-    top: 20px;
-    min-width: 365px;
+    height: 450px;
+    width: 400px; 
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    
+    button:hover 
+    {
+        background-color: @boutonHover;    
+    }
+}
+
+#bloc_choix
+{
+    display: none;    
+}
+
+#bloc_billet
+{
+    display: none;
+}
+
+#bloc_billet_fam
+{
+    display: none;
+}
+
+#bloc_facturation
+{
+    display: none;    
+}
+
+#bloc_validation
+{
+    display: none;    
+}
+
+.hprtr
+{
+    display: none;
+}
+
+#bloc_form_affichage
+{
+    .shadow;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px;
+    margin-top: 10px;
+    border: 1px solid @noir;
+    border-radius: 5px;
+}
+
+.intForm
+{
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;    
+    border: 1px solid @noir;
+    border-radius: 5px;
+}
+
+.btnexsui1
+{
+    
+    width: 83px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    button
+    {
+        .btNetB
+    }    
+}
+
+.btnexsui2
+{
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    button
+    {
+        .btNetB
+    }
+    
+    input
+    {
+        .btNetB
+    }
+    
+    input:hover 
+    {
+        background-color: @boutonHover;    
+    }
+    
+}
+
+.btPM
+{
+    width: 40px;
+    text-align: center;
+    background-color: @blanc;
+    color: @noir;
+    border: 1px solid @gris;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-right: 5px;
+    margin-top: 1px;
+    .shadowMin
+}
+
+#nextB
+{
+    .btBillet;
+}
+
+#backB
+{
+    .btBillet;   
 }
 
 #dateConnexion
@@ -160,21 +370,181 @@ body
     display: none;
 }
 
-#totalPanier
-{
-    display: none;
-}
-
 .formulaireCoor
 {
     max-width: 500px;
 }
 
-.blocUnBillet
+.hideBillet
+{
+    background-color: @blanc;
+    display: none;
+}
+
+#panier
+{
+    display: none;
+    position: fixed;
+    top: 30px;
+    right: 160px;
+    max-width: 320px;
+    text-align: justify;
+}
+
+#btPanier
+{
+    float: right;
+    margin-right: 15px;
+    background: rgba(0,0,0,0);
+    border: none;
+    outline:none;
+}
+
+#icoPanier
+{
+    color: @blanc;
+    font-size: 25px;
+}
+
+#btPanier:hover 
+{
+    #icoPanier
+    {
+        color: @boutonHover;
+    }
+}
+
+input[readonly] {
+     cursor: pointer !important;
+}
+
+
+#commande_dateReservation
 {
     background-color: @blanc;
 }
 
+#panierBillets div
+{
+    padding-top: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 5px;
+    background-color: @blanc;
+    border: solid 1px @gris;
+    line-height: 50%;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#totalPanier, #dateVisite, #typeBillet, #nbPersonne, 
+#ValNomFa, #ValPreFa, #ValPaysFa, #ValCourrielFa, #ValTotal
+{
+    .valeursPanier
+}
+
+.billetRecap
+{
+    padding-top: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 5px;
+    background-color: @blanc;
+    border: solid 1px @gris;
+    line-height: 50%;
+    text-align: center;
+    margin-top: 5px;
+}
+
+
+#bloc_form_paiement
+{
+    height: 450px;
+    width: 400px; 
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    
+    button:hover 
+    {
+        background-color: @boutonHover;    
+    }
+    
+    h2
+    {
+        margin-top: 0px;
+    }
+}
+
+.valeurRecap
+{
+    .valeursPanier
+}
+
+.aPayer
+{
+    text-align: center;
+}
+
+.bstripe
+{
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*------------------------------------------------------------------------
+---------------------- VALIDATION FORM -----------------------------------
+------------------------------------------------------------------------*/
+
+.champVide
+{
+    background-color: @champVide;
+}
+
+.champRemp
+{
+    background-color: @blanc;
+}
+
+.messageErreur
+{
+    color: @champVide;
+}
+
+/*------------------------------------------------------------------------
+---------------------- FOOTER -------------------------------------------
+------------------------------------------------------------------------*/
+
+footer
+{
+    padding-top: 5px;
+    border-top: 2px solid @gris;
+    margin-left: 0px;
+    width: 100%;
+    color: @blanc;
+}
+
+.topFooter
+{
+
+}
+
+.CgvMentions
+{
+
+    margin-top: 10px;
+}
+
+.cgv
+{
+    float: right;
+}
+
+.copy
+{
+    float: right;
+}
 
 /*------------------------------------------------------------------------
 ---------------------- MEDIA QUERIES -------------------------------------
@@ -206,7 +576,7 @@ body
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        min-height: 480px;
+        min-height: 800px;
     }
     
     #horraires
@@ -214,8 +584,103 @@ body
         font-size: 80%;
     }
     
+    .paiement
+    {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        
+        h2
+        {
+            text-align: center;
+        }
+    
+    }
+    
+}
+
+@media (max-width: 630px) {
+    #panier
+    {
+        position: fixed;
+        top: 30px;
+        width: 320px;
+        left:0;
+        right:0;
+        margin-left:auto;
+        margin-right:auto;
+    }
 }
 
 @media (max-width: 480px) {
+    
+    #headAccueil
+    {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 800px;
+    }
+    
+    #bloc_form
+    {
+        width: 340px;
+    }
+    
+    #panier
+    {
+        width: 340px;
+    }
+    
+    .logoTitre
+    {
+        margin-bottom: 10px;
+    }
+    
+    .logoTitre p
+    {
+        text-align: center;
+    }
+    
+    .traduction
+    {
+        border-top: 1px solid @gris;
+        border-bottom: 1px solid @gris;
+        padding-top: 5px;
+        img
+        {
+            max-height: 25px;
+            float: none;
+        }
+    }
 
+    .drapfr
+    {
+        padding-right: 15px;
+        padding-left: 5px;
+    }
+    
+    #panier
+    {
+        top: 70px;
+    }
+    
+    #btPanier
+    {
+        margin-right: 5px;
+    } 
+}
+
+@media (max-width: 330px) {
+    
+    #bloc_form
+    {
+        width: 310px;
+    }
+    
+    #panier
+    {
+        width: 310px;
+    }
 }

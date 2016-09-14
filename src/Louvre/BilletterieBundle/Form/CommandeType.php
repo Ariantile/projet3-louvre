@@ -22,13 +22,15 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateReservation', 'date', array(
+            ->add('dateReservation', DateType::class , array(
                   'widget'       => 'single_text',
                   'input'        => 'datetime',
                   'format'       => 'dd/MM/yyyy',
                   'attr'         => array(
                   'class'        => 'dateReserv',
-                  'placeholder'  => 'jj/mm/aaaa'),))
+                  'placeholder'  => 'jj/mm/aaaa',
+                  'maxlength'    => '10',
+                  'readonly'     => 'true'),))
             ->add('demiJournee', ChoiceType::class, array(
                   'choices'      => array(
                   'Journée'      => false,
@@ -37,11 +39,11 @@ class CommandeType extends AbstractType
                   'multiple'     => false,
                   'label'        => 'Type de billet'))
             ->add('qte',         IntegerType::class, array(
-                  'disabled'     => true,
-                  'attr' =>      array(
-                      'min' => 0,
-                      'max' => 9,)
-                  ))
+                  'label'        => false,
+                  'attr'         => array(
+                  'min'          => 0,
+                  'max'          => 9,
+                  'readonly'     => 'true')))
             ->add('facturation', FacturationType::class)
             ->add('billets', CollectionType::class, array(
                   'entry_type'   => BilletType::class,

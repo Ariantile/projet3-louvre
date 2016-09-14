@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@LouvreBilletterieBundle/Resources/config/services.yml" }
-    - { resource: "@LouvreUserBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -72,36 +71,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# FOSUser Configuration
-fos_user:
-    db_driver:     orm                       
-    firewall_name: main                      
-    user_class:    Louvre\UserBundle\Entity\User
-   
-# Sonata_block Configuration  
-sonata_block:
-    default_contexts: [sonata_page_bundle]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
-
-        #sonata.admin_doctrine_orm.block.audit:
-        #    contexts:   [admin]
-
-        sonata.block.service.text:
-        sonata.block.service.rss:
-
-        # Some specific block from the SonataMediaBundle
-        #sonata.media.block.media:
-        #sonata.media.block.gallery:
-        #sonata.media.block.feature_media:
-
-        # Some block with different templates
-        #acme.demo.block.demo:
-        #    templates:
-        #       - { name: 'Simple', template: 'AcmeDemoBundle:Block:demo_simple.html.twig' }
-        #       - { name: 'Big',    template: 'AcmeDemoBundle:Block:demo_big.html.twig' }
-        
 payum:
     security:
         token_storage:
@@ -111,12 +80,6 @@ payum:
         Louvre\BilletterieBundle\Entity\Payment: { doctrine: orm }
         
     gateways:
-        louvre_paypal_checkout:
-            factory: paypal_express_checkout
-            username: ariantile-facilitator_api1.hotmail.com
-            password: 42LBD5Z2SD8Z5AYH
-            signature: AqmQnsd4h7OsVndgR0AjQNmnnpJBArBcFfkLHCkJSk9CIxONDJL9bx4W
-            sandbox: true
         louvre_stripe_checkout:
             factory: stripe_checkout
             publishable_key: pk_test_SWKJLqWs1X8sbc9u2IK2MNOs

@@ -6,55 +6,19 @@
 
 {% block header %}
 <div id="headAccueil" class="container">
-    <div class="row" id="secuHorraire">
-        <div class="col-sm-4 col-md-3" id="horraire">
-            <h2>Horraires d'ouverture</h2>
-            <p>Le musée est ouvert tous les jours de 9h à 18h excepté le mardi.<br>
-            (Fermeture des salles à partir de 17h30)</p>
-        </div>
-        <div class="col-sm-offset-4 col-sm-4 col-md-offset-6 col-md-3" id="secu">
-            <h2>Rappel de sécurité</h2>
-            <p>Il n'est pas recommandé de venir au musée avec des sacs et
-            des valises. Ils seront dans tous les cas déposés au vestiaire
-            après avoir été contrôlés.</p>
-        </div>
+    <div id="ancreFormAcc" class="row">
+        {% block form %}
+        {% endblock %}
     </div>
 </div>
+
 {% endblock %}
 
 {% block content %}
-    <div class="container blocFleche">
-        <div class="row">
-            <div class="col-md-4 recup">
-                <p>
-                    Billet perdu ? Indiquez l'adresse courriel utilisée lors de votre achat,<br>
-                    un nouveau courriel vous sera envoyé contenant vos billets.
-                </p>
-            </div>
-            <div class="col-md-4" id="bouttonFleche">
-                <a href="#ancreFormAcc">Vers la billetterie</a>
-            </div>
-            <div class="col-md-4 paiement">
-                <h2>Moyen de paiement</h2>
-                <div class="carte">
-                    <img src="{{ asset('bundles/louvrebilletterie/images/cbvisa.png') }}" alt="Visa" />
-                    <img src="{{ asset('bundles/louvrebilletterie/images/cbmaster.png') }}" alt="Master card" />
-                    <img src="{{ asset('bundles/louvrebilletterie/images/cbamerican.png') }}" alt="American express" />
-                    <img src="{{ asset('bundles/louvrebilletterie/images/cbpaypal.jpg') }}" alt="Paypal" class="icoPaypal"/>
-                </div>
-            </div>
-        </div>
-    </div>
 
     {# Message flash #}
     {% for message in app.session.flashbag.get('info') %}
         <div class="alert alert-info">Message flash : {{ message }}</div>
     {% endfor %}
-    
-    <div id="ancreFormAcc" class="container">
-        {% block form %}
-
-        {% endblock %}
-    </div>
-          
+         
 {% endblock %}

@@ -3,6 +3,8 @@
 namespace Louvre\BilletterieBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Billet
@@ -17,12 +19,6 @@ class Billet
      * @ORM\JoinColumn(nullable=false)
      */
     private $commande;
-     
-    /**
-     * @ORM\ManyToOne(targetEntity="Louvre\BilletterieBundle\Entity\Tarifs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $tarifs;
     
     /**
      * @var int
@@ -77,6 +73,22 @@ class Billet
      * @Assert\NotBlank()
      */
     private $paysBillet;
+    
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="prix_billet", type="decimal", precision = 4, scale = 2)
+     * @Assert\NotBlank()
+     */
+    private $prixBillet;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tarif_billet", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $tarifBillet;
 
 
     /**
@@ -232,28 +244,52 @@ class Billet
     {
         return $this->commande;
     }
-
+    
     /**
-     * Set tarifs
+     * Set prixBillet
      *
-     * @param \Louvre\BilletterieBundle\Entity\Tarifs $tarifs
+     * @param decimal $prixBillet
      *
      * @return Billet
      */
-    public function setTarifs(\Louvre\BilletterieBundle\Entity\Tarifs $tarifs)
+    public function setPrixBillet($prixBillet)
     {
-        $this->tarifs = $tarifs;
+        $this->prixBillet = $prixBillet;
 
         return $this;
     }
 
     /**
-     * Get tarifs
+     * Get prixBillet
      *
-     * @return \Louvre\BilletterieBundle\Entity\Tarifs
+     * @return decimal
      */
-    public function getTarifs()
+    public function getPrixBillet()
     {
-        return $this->tarifs;
+        return $this->prixBillet;
+    }
+    
+    /**
+     * Set tarifBillet
+     *
+     * @param string $tarifBillet
+     *
+     * @return Billet
+    */
+    public function setTarifBillet($tarifBillet)
+    {
+        $this->tarifBillet = $tarifBillet;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifBillet
+     *
+     * @return string
+     */
+    public function getTarifBillet()
+    {
+        return $this->tarifBillet;
     }
 }

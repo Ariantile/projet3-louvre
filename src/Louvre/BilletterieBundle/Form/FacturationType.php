@@ -21,16 +21,24 @@ class FacturationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomFacture', TextType::class)
-            ->add('prenomFacture', TextType::class)
-            ->add('pays', CountryType::class)
-            ->add('naissanceFacture', 'date', array(
+            ->add('nomFacture', TextType::class, array(
+                  'attr'        => array(
+                  'maxlength'    => '30',
+                  'class'       => 'nom')))
+            ->add('prenomFacture', TextType::class, array(
+                  'attr'        => array(
+                  'maxlength'    => '30',
+                  'class'       => 'prenom')))
+            ->add('pays', CountryType::class, array(
+                  'placeholder' => 'Pays de résidence'))
+            ->add('naissanceFacture', DateType::class, array(
                   'widget'      => 'single_text',
                   'input'       => 'datetime',
                   'format'      => 'dd/MM/yyyy',
                   'attr'        => array(
                   'class'       => 'dateFacturation',
-                  'placeholder' => 'jj/mm/aaaa'),))
+                  'placeholder' => 'jj/mm/aaaa',
+                  'maxlength'   => '10'),))
             ->add('courriel', RepeatedType::class, array(
                   'type'            => EmailType::class,
                   'invalid_message' => 'Les deux adresses courriel doivent être identiques.',

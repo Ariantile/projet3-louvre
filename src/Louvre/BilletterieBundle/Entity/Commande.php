@@ -23,10 +23,16 @@ class Commande
     private $facturation;
     
     /**
-     * @ORM\OneToMany(targetEntity="Louvre\BilletterieBundle\Entity\Billet", mappedBy="commande")
+     * @ORM\OneToMany(targetEntity="Louvre\BilletterieBundle\Entity\Billet", mappedBy="commande", cascade={"persist"})
      * @Assert\Valid()
      */
     private $billets;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Louvre\BilletterieBundle\Entity\Payment")
+     * @ORM\JoinColumn()
+     */
+    private $payment;
        
     /**
      * @var int
@@ -95,6 +101,12 @@ class Commande
      */
     private $status;
     
+    public function __construct()
+    {
+        $this->dateCommande = new \Datetime();
+        $this->billets = new ArrayCollection();
+    }
+    
     public function setFacturation (Facturation $facturation)
     {
         $this->facturation = $facturation;
@@ -103,12 +115,6 @@ class Commande
     public function getFacturation()
     {
         return $this->facturation;
-    }
-    
-    public function __construct()
-    {
-        $this->dateCommande = new \Datetime();
-        $this->quantites = new ArrayCollection();
     }
     
     /**
@@ -321,5 +327,15 @@ class Commande
     public function getDemiJournee()
     {
         return $this->demiJournee;
+    }
+    
+    public function setPayment (Payment $Payment)
+    {
+        $this->Payment = $Payment;
+    }
+    
+    public function getPayment()
+    {
+        return $this->Payment;
     }
 }
