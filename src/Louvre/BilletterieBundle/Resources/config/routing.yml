@@ -5,22 +5,12 @@ louvre_core_homepage:
     defaults: 
         _controller: LouvreBilletterieBundle:Billetterie:formacc
 
-louvre_billetterie_validation:
-    path:   /validation
-    defaults:
-        _controller: LouvreBilletterieBundle:Billetterie:validation
-
 louvre_billetterie_paiement:
     path:    /paiement
     defaults: 
         _controller: LouvreBilletterieBundle:Billetterie:paiement
         
-louvre_stripe:
-    path:   /paiement/stripe
-    defaults:
-        _controller: LouvreBilletterieBundle:Billetterie:prepareStripe
-        
 louvre_payment_done:
-    path:   /paiement/remerciement
+    path:   /remerciement
     defaults:
         _controller: LouvreBilletterieBundle:Billetterie:done

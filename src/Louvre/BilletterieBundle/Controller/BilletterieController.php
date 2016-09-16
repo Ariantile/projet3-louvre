@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Extra;
-use Louvre\BilletterieBundle\Entity\Quantite;
+use Louvre\BilletterieBundle\Entity\Payment;
 use Louvre\BilletterieBundle\Entity\Tarifs;
 use Louvre\BilletterieBundle\Entity\Facturation;
 use Louvre\BilletterieBundle\Entity\Billet;
@@ -50,17 +50,20 @@ class BilletterieController extends Controller
             
             $demiJournee = $commande->getDemiJournee();
             
-            $commande->setStatus('En cours');
+            $commande->setStatus('Ongoing');
             
             $billets = $commande->getBillets();
             
             $total = 0;
             
+            $i = 1;
+            
             foreach ($billets as $billet) {
-                $billet->setCodeReservation(uniqid());
+                $billet->setCodeReservation($commande->getNumCommande() . $i);
                 $billet->setCommande($commande);
                 $prixBillet = $billet->getPrixBillet();
                 $total = $total + $prixBillet;
+                $i++;
             }
             
             if ($demiJournee === true) {
@@ -91,10 +94,15 @@ class BilletterieController extends Controller
     {
         $session = $request->getSession();
         
-        $gatewayName = 'louvre_stripe_checkout';
+        if ($session->has('idCommande')) {
+            $idCommande = $session->get('idCommande');
+            $demiJournee = $session->get('demiJournee');
+        } else {
+            $session->getFlashBag()->add('erreur', 'Session expirée ou inexistante.');
+            return $this->redirectToRoute('louvre_core_homepage');
+        }
         
-        $idCommande = $session->get('idCommande');
-        $demiJournee = $session->get('demiJournee');
+        $gatewayName = 'louvre_stripe_checkout';
         
         $commandeEnCours = $this
             ->getDoctrine()
@@ -121,11 +129,18 @@ class BilletterieController extends Controller
         $payment["amount"] = $total * 100;
         $payment["currency"] = 'EUR';
         $payment["description"] = 'Louvre Billetterie';
+        $payment["metadata"] = array ("numero_commande" => $commandeEnCours[0]->getCommande()->getNumCommande());
         
         if ($request->isMethod('POST') && $request->request->get('stripeToken')) {
             
             $payment["card"] = $request->request->get('stripeToken');
             $storage->update($payment);
+            $em = $this->getDoctrine()->getManager();
+            $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);
+            $update->setPaymentId($payment->getId());
+            
+            $em->flush();
+            
             $captureToken = $this->getPayum()->getTokenFactory()->createCaptureToken(
                 $gatewayName,
                 $payment,
@@ -146,7 +161,15 @@ class BilletterieController extends Controller
     
     public function doneAction(Request $request)
     {
-        //Stopper la session
+        $session = $request->getSession();
+        
+        $idCommande = $session->get('idCommande');
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $commandeEnCours = $em
+            ->getRepository('LouvreBilletterieBundle:Billet')
+            ->getCommande($idCommande);
         
         $token = $this->get('payum')->getHttpRequestVerifier()->verify($request);
 
@@ -155,46 +178,61 @@ class BilletterieController extends Controller
 
         $gateway = $this->get('payum')->getGateway($token->getGatewayName());
         
-        // you can invalidate the token. The url could not be requested any more.
-        // $this->get('payum')->getHttpRequestVerifier()->invalidate($token);
-
-        // Once you have token you can get the model from the storage directly. 
-        //$identity = $token->getDetails();
-        //$details = $payum->getStorage($identity->getClass())->find($identity);
-
-        // or Payum can fetch the model for you while executing a request (Preferred).
         $gateway->execute($status = new GetHumanStatus($token));
         $details = $status->getFirstModel();
         
-        /*{"status":"captured","details":{"amount":3200,"currency":"eur","description":"Louvre Billetterie","card":"tok_18tdpyISiGMCWUEpmBiFXKuq","id":"ch_18tdq3ISiGMCWUEpYylkpVJf","object":"charge","amount_refunded":0,"application_fee":null,"balance_transaction":"txn_18tdq3ISiGMCWUEpXffMfSBg","captured":true,"created":1473861251,"customer":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":[],"invoice":null,"livemode":false,"metadata":[],"order":null,"paid":true,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"object":"list","data":[],"has_more":false,"total_count":0,"url":"\/v1\/charges\/ch_18tdq3ISiGMCWUEpYylkpVJf\/refunds"},"shipping":null,"source":{"id":"card_18tdpyISiGMCWUEp5nvT6dNd","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":"pass","dynamic_last4":null,"exp_month":2,"exp_year":2020,"fingerprint":"BN7j0ZTinSSvlC0T","funding":"credit","last4":"4242","metadata":[],"name":"ariantile@hotmail.com","tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded"}}*/
+        if ($status->isCaptured()) {
+            
+            //$session->invalidate();
+            $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);
+            $update->setStatus('Valide');
+            $update->setNumCommande($update->getNumCommande() . $idCommande);
+            
+            foreach ($commandeEnCours as $billet) {
+                $billet->setCodeReservation($billet->getCodeReservation() . $idCommande);
+            }
+            
+            $em->flush();
+            
+            $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
+            
+            $mail = \Swift_Message::newInstance();
+            
+            $logo = $mail->embed(\Swift_Image::fromPath($image));
+            
+            $mail->setSubject('Louvre billetterie - Vos billets')
+                ->setFrom('billetterie@louvre.com')
+                ->setTo($update->getFacturation($idCommande)->getCourriel())
+                ->setBody(
+                    $this->renderView(
+                    // app/Resources/views/Emails/registration.html.twig
+                        'LouvreBilletterieBundle:Billetterie:mailbillet.html.twig',
+                        array('infos' => $commandeEnCours, 'logo' => $logo)
+                    ),
+                    'text/html'
+                );
+            
+            $this->get('mailer')->send($mail);
+            
+        } else if ($status->isPending() || $status->isFailed()) {
+            
+            $session->invalidate();
+            $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);
+            $update->setStatus('Failed');
+            
+            $em->flush();
+            
+        }
         
+        return $this->render('LouvreBilletterieBundle:Billetterie:remerciement.html.twig', array(
+            'commandeEnCours' => $commandeEnCours
+        ));
         
-        
-        
-        
-        
-        // you have order and payment status 
-        // so you can do whatever you want for example you can just print status and payment details.
-
         return new JsonResponse(array(
             'status' => $status->getValue(),
             'details' => iterator_to_array($details),
         ));
     }
-    
-    public function validationAction(Request $request)
-    {        
-        $commandeEnCours = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('LouvreBilletterieBundle:Billet')
-            ->getCommande(12);
-        
-        return $this->render('LouvreBilletterieBundle:Billetterie:validation.html.twig', array(
-            'commandeEnCours' => $commandeEnCours
-        ));
-    }
-    
 
     /**
      * @return Payum

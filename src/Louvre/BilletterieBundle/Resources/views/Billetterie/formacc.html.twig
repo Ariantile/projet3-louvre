@@ -4,6 +4,11 @@
     <div id="bloc_form">
         <div id="dateConnexion">{{ dateConnexion.format('d/m/Y')}}</div>
         <div id="heureConnexion">{{ dateConnexion.format('H')}}</div>
+        {% for message in app.session.flashbag.get('erreur') %}
+            <div class="flash-message">
+                {{ message }}
+            </div>
+        {% endfor %}
         <div id="step">
             <span id="step1" class="stepActuOn">1</span>
             <span>-</span>

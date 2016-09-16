@@ -70,6 +70,19 @@
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=5);
 }
 
+.blocUnBillet
+{
+    padding-top: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 5px;
+    background-color: @blanc;
+    border: solid 1px @gris;
+    line-height: 50%;
+    text-align: center;
+    margin-top: 5px;
+}
+
 /*------------------------------------------------------------------------
 ---------------------- POLICES -------------------------------------------
 ------------------------------------------------------------------------*/
@@ -426,15 +439,7 @@ input[readonly] {
 
 #panierBillets div
 {
-    padding-top: 8px;
-    padding-left: 2px;
-    padding-right: 2px;
-    border-radius: 5px;
-    background-color: @blanc;
-    border: solid 1px @gris;
-    line-height: 50%;
-    text-align: center;
-    margin-top: 5px;
+    .blocUnBillet
 }
 
 #totalPanier, #dateVisite, #typeBillet, #nbPersonne, 
@@ -445,15 +450,7 @@ input[readonly] {
 
 .billetRecap
 {
-    padding-top: 8px;
-    padding-left: 2px;
-    padding-right: 2px;
-    border-radius: 5px;
-    background-color: @blanc;
-    border: solid 1px @gris;
-    line-height: 50%;
-    text-align: center;
-    margin-top: 5px;
+    .blocUnBillet
 }
 
 
@@ -494,7 +491,7 @@ input[readonly] {
 }
 
 /*------------------------------------------------------------------------
----------------------- VALIDATION FORM -----------------------------------
+---------------------- VALIDATION ----------------------------------------
 ------------------------------------------------------------------------*/
 
 .champVide
@@ -510,6 +507,18 @@ input[readonly] {
 .messageErreur
 {
     color: @champVide;
+}
+
+.flash-message
+{
+    margin-bottom: 5px;
+    color: @champVide;
+    background-color: @blanc;
+    border: 3px solid rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    .shadowMin
 }
 
 /*------------------------------------------------------------------------

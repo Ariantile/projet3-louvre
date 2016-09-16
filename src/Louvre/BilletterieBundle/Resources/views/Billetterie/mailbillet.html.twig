@@ -1,0 +1,167 @@
+<div style="background-color: #FBFBFB">
+   
+    <table cellpadding="5px" cellspacing="0" style="background-color: #FBFBFB; max-width: 600px; margin: 0 auto; padding: 0" width="100%">
+        <tr style="background-color: #FBFBFB">
+            <td style="text-align: center;"><img src="{{ logo }}" alt="logo"></td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold; 
+                       font-size: 20px; 
+                       text-align: center;
+                       border: 1px solid grey;
+                       border-top-left-radius: 5px;
+                       border-top-right-radius: 5px;
+                       background-color: #312C2C;
+                       color: white;
+                      ">
+                Louvre billetterie
+            </td>
+        </tr>
+        <tr style="background-color: white; text-align: justify;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey; 
+                       border-bottom: 1px solid grey; 
+                       border-bottom-right-radius: 5px;
+                       border-bottom-left-radius: 5px;">
+                           Le musée du Louvre vous remercie de votre commande. Vous trouverez 
+                           ci-dessous un récapitulatif de votre commande ainsi que les informations
+                            vous permettant d'accéder au musée.
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 20px;">
+                
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold; 
+                       font-size: 20px; 
+                       text-align: center;
+                       border: 1px solid grey;
+                       border-top-left-radius: 5px;
+                       border-top-right-radius: 5px;
+                       background-color: #312C2C;
+                       color: white;
+                      ">
+                Informations de facturation
+                </td>
+        </tr>
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;">
+                           Nom : {{ infos[0].commande.facturation.nomFacture }}
+            </td>
+        </tr> 
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;">
+                           Prenom : {{ infos[0].commande.facturation.prenomFacture }}
+            </td>
+        </tr>
+
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;">
+                            Date de naissance : {{ infos[0].commande.facturation.naissanceFacture|date("m/d/Y") }}
+            </td>
+        </tr>
+        
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;
+                       border-bottom: 1px solid grey; 
+                       border-bottom-right-radius: 5px;
+                       border-bottom-left-radius: 5px;">
+                            Adresse courriel : {{ infos[0].commande.facturation.courriel }}
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 20px;">
+                
+            </td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold; 
+                       font-size: 20px; 
+                       text-align: center;
+                       border: 1px solid grey;
+                       border-top-left-radius: 5px;
+                       border-top-right-radius: 5px;
+                       background-color: #312C2C;
+                       color: white;
+                      ">
+                Recapitulatif de commande
+                </td>
+        </tr>
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;"> 
+                            Jour de la visite : {{ infos[0].commande.dateReservation|date("m/d/Y") }}
+            </td>
+        </tr>
+        
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;"> 
+                           Type de billet(s) : 
+                           {% if infos[0].commande.demiJournee == true %}
+                                <span>Demi-journée</span>
+                            {% else %}
+                                <span>Journée</span>
+                            {% endif %}
+            </td>
+        </tr>
+        
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;
+                       border-bottom: 1px solid grey;
+                       border-bottom-right-radius: 5px;
+                       border-bottom-left-radius: 5px;">
+                            Nombre de visiteur : {{ infos[0].commande.qte }}
+            </td>
+        </tr>
+        <tr>
+            <td style="height: 20px;">
+                
+            </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: bold; 
+                       font-size: 20px; 
+                       text-align: center;
+                       border: 1px solid grey;
+                       border-top-left-radius: 5px;
+                       border-top-right-radius: 5px;
+                       background-color: #312C2C;
+                       color: white;
+                      ">
+                Billets
+            </td>
+        </tr>    
+        {% for billet in infos %}
+            <tr style="background-color: white; text-align: center;">
+                <td style="border-left: 1px solid grey;
+                           border-right: 1px solid grey;">
+                                {{ billet.nomBillet }} {{ billet.prenomBillet }}
+                </td>
+            </tr>
+            <tr style="background-color: white; text-align: center;">
+                <td style="border-left: 1px solid grey;
+                           border-right: 1px solid grey;">
+                               Tarif : {{ billet.tarifBillet }}
+                </td>
+            </tr>
+            <tr style="background-color: white; text-align: center;">
+                <td style="border-left: 1px solid grey;
+                           border-right: 1px solid grey;
+                           border-bottom: 1px solid grey;">
+                               Prix hors reduction : {{ billet.prixBillet }}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr style="text-align: right; ">
+            <td>Musée du Louvre© {{ 'now'|date('Y') }}</td>
+        </tr>
+    </table>
+</div>

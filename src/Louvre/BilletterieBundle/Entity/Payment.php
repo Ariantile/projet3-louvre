@@ -9,7 +9,7 @@ use Payum\Core\Model\ArrayObject;
  * @ORM\Entity
  */
 class Payment extends ArrayObject
-{
+{   
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -18,7 +18,7 @@ class Payment extends ArrayObject
      * @var integer $id
      */
     protected $id;
-
+    
     /**
      * Get id
      *

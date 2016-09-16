@@ -29,11 +29,14 @@ class Commande
     private $billets;
     
     /**
-     * @ORM\OneToOne(targetEntity="Louvre\BilletterieBundle\Entity\Payment")
-     * @ORM\JoinColumn()
+     * @var int
+     *
+     * @ORM\Column(name="payment_id", type="integer", nullable=true)
+     * @Assert\Valid() 
+     *
      */
-    private $payment;
-       
+    private $paymentId;
+    
     /**
      * @var int
      *
@@ -46,7 +49,7 @@ class Commande
     /**
      * @var string
      *
-     * @ORM\Column(name="num_commande", type="string", length=12, unique=true)
+     * @ORM\Column(name="num_commande", type="string", length=14, unique=true)
      */
     private $numCommande;
     
@@ -173,6 +176,18 @@ class Commande
     public function getDateCommande()
     {
         return $this->dateCommande;
+    }
+    
+    public function setPaymentId($paymentId)
+    {
+        $this->paymentId = $paymentId;
+        
+        return $this;
+    }
+    
+    public function getPaymentId()
+    {
+        return $this->paymentId;
     }
     
     /**
@@ -327,15 +342,5 @@ class Commande
     public function getDemiJournee()
     {
         return $this->demiJournee;
-    }
-    
-    public function setPayment (Payment $Payment)
-    {
-        $this->Payment = $Payment;
-    }
-    
-    public function getPayment()
-    {
-        return $this->Payment;
     }
 }

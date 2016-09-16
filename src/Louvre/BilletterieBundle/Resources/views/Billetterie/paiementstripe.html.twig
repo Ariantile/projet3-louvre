@@ -1,75 +1,7 @@
-{% extends "LouvreBilletterieBundle:Billetterie:index.html.twig" %}
+{% extends "LouvreBilletterieBundle:Billetterie:validation.html.twig" %}
 
-{% block form %}
+{% block boutton %}
     {{ parent() }}
-<div id="bloc_form_paiement">
-    <div id="bloc_form_affichage">
-        
-        <div class="intForm">
-            <h2>Informations de facturation</h2>
-            <p>
-                <span>Nom et prenom :</span>
-                <span class="valeurRecap"> 
-                    {{ commandeEnCours[0].commande.facturation.nomFacture }}
-                    {{ commandeEnCours[0].commande.facturation.prenomFacture }}
-                </span>
-            </p>
-            <p>
-                <span>Date de naissance :</span>
-                <span class="valeurRecap">
-                    {{ commandeEnCours[0].commande.facturation.naissanceFacture|date("m/d/Y") }}
-                </span>
-            </p>
-            <p>
-                <span>Adresse courriel :</span>
-                <span class="valeurRecap">
-                    {{ commandeEnCours[0].commande.facturation.courriel }}
-                </span> 
-            </p>
-        </div>
-        <div class="intForm">
-            <h2>Recapitulatif de commande</h2>
-            <p>
-                <span>Jour de la visite : </span>
-                <span class="valeurRecap">
-                    {{ commandeEnCours[0].commande.dateReservation|date("m/d/Y") }}
-                </span>
-            </p>
-            <p>
-                <span>Type de billet(s) : </span>
-                {% if commandeEnCours[0].commande.demiJournee == true %}
-                    <span class="valeurRecap">Demi-journée</span>
-                {% else %}
-                    <span class="valeurRecap">Journée</span>
-                {% endif %}     
-            </p>
-            <p>
-                <span>Nombre de visiteur : </span>
-                <span class="valeurRecap">
-                    {{ commandeEnCours[0].commande.qte }}
-                </span>
-            </p>
-            <h3>Billets</h3>
-            {% for billet in commandeEnCours %}
-            <div class="billetRecap">
-                <p>
-                    <span class="valeurRecap">      
-                        {{ billet.nomBillet }}
-                        {{ billet.prenomBillet }}
-                    </span>
-                </p>
-                <p>
-                    <span>Tarif : {{ billet.tarifBillet }}</span>
-                </p>
-                <p>
-                    <span>Prix hors reduction : </span>
-                    <span>{{ billet.prixBillet }}</span>
-                </p>
-                
-            </div>
-            {% endfor %}
-        </div>
-        
         <form action="" method="POST" class="intForm">
             <p class="aPayer">
                     <span>Total à payer : </span>
@@ -91,6 +23,5 @@
             </div>
         </form>
     </div>
-</div>
-    
+</div> 
 {% endblock %}
