@@ -6,7 +6,7 @@
         <div id="heureConnexion">{{ dateConnexion.format('H')}}</div>
         {% for message in app.session.flashbag.get('erreur') %}
             <div class="flash-message">
-                {{ message }}
+                {{ message|trans }}
             </div>
         {% endfor %}
         <div id="step">
@@ -21,30 +21,65 @@
         <div id="bloc_form_affichage">
             <div class="intForm" id="secuHorraire">
                 <div id="horraire">
-                    <h2>Horaires d'ouverture</h2>
-                    <p>Le musée est ouvert tous les jours de 9h à 18h excepté le mardi.<br>
-                    (Fermeture des salles à partir de 17h30)</p>
+                    <h2>
+                        {% trans %}
+                            louvre.accueil.horaire.titre
+                        {% endtrans %}
+                    </h2>
+                    <p>
+                        {% trans %}
+                            louvre.accueil.horaire.message1
+                        {% endtrans %}
+                        <br>
+                        {% trans %}
+                            louvre.accueil.horaire.message2
+                        {% endtrans %}
+                    </p>
                 </div>
                 <div id="secu">
-                    <h2>Rappel de sécurité</h2>
-                    <p>Il n'est pas recommandé de venir au musée avec des sacs et
-                    des valises. Ils seront dans tous les cas déposés au vestiaire
-                    après avoir été contrôlés.</p>
+                    <h2>
+                        {% trans %}
+                            louvre.accueil.securite.titre
+                        {% endtrans %}
+                    </h2>
+                    <p>
+                        {% trans %}
+                            louvre.accueil.securite.message
+                        {% endtrans %}
+                    </p>
                 </div>
                 <div id="reduit">
-                    <h2>Tarif réduit</h2>
-                    <p>Si vous choisissez d'appliquer le tarif réduit, un justificatif vous sera demandé à l'entrée. <br>
-                    Sont concernés par ce tarif : les étudiants, les employés du musée ou d’un service du Ministère de la Culture, et les militaires.</p>
+                    <h2>
+                        {% trans %}
+                            louvre.accueil.reduit.titre
+                        {% endtrans %}
+                    </h2>
+                    <p>
+                        {% trans %}
+                            louvre.accueil.reduit.message1
+                        {% endtrans %} 
+                        <br>
+                        {% trans %}
+                           louvre.accueil.reduit.message2
+                        {% endtrans %}
+                    </p>
                 </div>
                 <div class="btnexsui1">                
-                    <button id="next0" type="button">Débuter</button>
+                    <button id="next0" type="button">
+                        {{ 'louvre.accueil.debut_but'|trans }}
+                    </button>
                 </div>
             </div>
             {{ form_start(formcommande) }}
             <div class="intForm" id="bloc_choix">
-                {{ form_row(formcommande.dateReservation, {'label': 'Date de votre visite'}) }}
-                {{ form_row(formcommande.demiJournee, {'label': 'Choisissez votre type de billet'}) }}
-                <p>Veuillez indiquer le nombre de visiteur</p>   
+                {{ form_row(formcommande.dateReservation,
+                   {'label': 'louvre.accueil.choix.date'|trans, 
+                   'attr': {'placeholder': 'louvre.accueil.choix.date_place'|trans}}) 
+                }}
+                {{ form_row(formcommande.demiJournee, 
+                    {'label': 'louvre.accueil.choix.type'|trans}) 
+                }}
+                <p class="valeursPanier">{{ 'louvre.accueil.choix.nb'|trans }}</p>   
                 <div class="row">
                     <div class="col-xs-8">
                         {{ form_row(formcommande.qte) }}
@@ -52,40 +87,56 @@
                     <button id="addBillet" type="button" class="btPM">+</button>
                     <button id="supBillet" type="button" class="btPM">-</button>
                     <div class="btnexsui1">                
-                        <button id="next1" type="button">Suivant</button>
+                        <button id="next1" type="button">
+                            {{ 'louvre.accueil.next_but'|trans }}
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="intForm" id="bloc_billet">
                 <div class="conteneurBillet">
-                    {{ form_row(formcommande.billets, {'label': 'Informations nominatives de billet'}) }}
+                    {{ form_row(formcommande.billets, 
+                        {'label': 'louvre.accueil.billet.titre'|trans })
+                    }}
                 </div>
                 <button id="backB" type="button" ><</button>
                 <button id="nextB" type="button" >></button>
                 <div class="btnexsui2">                
-                    <button id="back2" type="button">Précédent</button>
-                    <button id="next2" type="button">Suivant</button>
+                    <button id="back2" type="button">
+                        {{ 'louvre.accueil.back_but'|trans }}
+                    </button>
+                    <button id="next2" type="button">
+                        {{ 'louvre.accueil.next_but'|trans }}
+                    </button>
                 </div>
             </div>
             <div class="intForm" id="bloc_facturation">
-                {{ form_row(formcommande.facturation, {'label': 'Informations de facturation'}) }}
+                {{ form_row(formcommande.facturation, 
+                    {'label': 'louvre.accueil.facturation.titre'|trans }) 
+                }}
                 <div class="btnexsui2">                
-                    <button id="back3" type="button">Précédent</button>
-                    <button id="next3" type="button">Suivant</button>
+                    <button id="back3" type="button">
+                        {{ 'louvre.accueil.back_but'|trans }}
+                    </button>
+                    <button id="next3" type="button">
+                        {{ 'louvre.accueil.next_but'|trans }}
+                    </button>
                 </div>
             </div>
             <div class="intForm" id="bloc_validation">
-                <h2>Facturation</h2>
-                <p>Nom : <span id="ValNomFa"></span></p>
-                <p>Prenom : <span id="ValPreFa"></span></p>
-                <p>Pays : <span id="ValPaysFa"></span></p>
-                <p>Courriel : <span id="ValCourrielFa"></span></p>
-                <h2>Recapitulatif de la commande</h2>
+                <h2>{{ 'louvre.accueil.validation.titre_f'|trans }}</h2>
+                <p>{{ 'louvre.accueil.label.nom'|trans }} : <span id="ValNomFa"></span></p>
+                <p>{{ 'louvre.accueil.label.prenom'|trans }} : <span id="ValPreFa"></span></p>
+                <p>{{ 'louvre.accueil.label.pays'|trans }} : <span id="ValPaysFa"></span></p>
+                <p>{{ 'louvre.accueil.facturation.mail'|trans }} : <span id="ValCourrielFa"></span></p>
+                <h2>{{ 'louvre.accueil.validation.titre_r'|trans }}</h2>
                 <p><span id="recap"></span></p>
                 <p><span id="ValTotal"></span></p>
                 <div class="btnexsui2">                
-                    <button id="back4" type="button">Précédent</button>
-                    <input type="submit" value="Paiement" />
+                    <button id="back4" type="button">
+                        {{ 'louvre.accueil.back_but'|trans }}
+                    </button>
+                    <input type="submit" value="{{ 'louvre.accueil.paie_but'|trans }}" />
                 </div>
             </div>
         {{ form_end(formcommande) }}
@@ -95,10 +146,10 @@
 
 <div id="panier">
     <div class="well">
-        <p>Date de visite : <span id="dateVisite">Aucune date selectionnée.</span></p>
-        <p>Type de billet(s) : <span id="typeBillet">Aucun type de billet selectionné.</span></p>
-        <p>Nombre de personne : <span id="nbPersonne">Aucun billet ajouté au panier.</span></p>
-        <h4>Panier :</h4>
+        <p>{{ 'louvre.accueil.choix.date'|trans }} : <span id="dateVisite">{{ 'louvre.accueil.panier.date_vide'|trans }}</span></p>
+        <p>{{ 'louvre.paiement.label.type'|trans }} : <span id="typeBillet">{{ 'louvre.accueil.panier.type_vide'|trans }}</span></p>
+        <p>{{ 'louvre.paiement.label.nb'|trans }} : <span id="nbPersonne">{{ 'louvre.accueil.panier.billet_vide'|trans }}</span></p>
+        <h4>{{ 'louvre.accueil.label.panier'|trans }} :</h4>
         <p id="panierBillets"></p>
         <p id="affichageTotalPanier"></p>
         <p id="totalPanier"></p>

@@ -14,3 +14,13 @@ louvre_payment_done:
     path:   /remerciement
     defaults:
         _controller: LouvreBilletterieBundle:Billetterie:done
+        
+louvre_billet_recover:
+    path:   /recover
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:recover
+        
+louvre_billet_recover_affichage:
+    path:   /commande
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:affichage

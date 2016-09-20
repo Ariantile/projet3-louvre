@@ -14,7 +14,7 @@
                        background-color: #312C2C;
                        color: white;
                       ">
-                Louvre billetterie
+                {{ 'louvre.mail.titre'|trans }}
             </td>
         </tr>
         <tr style="background-color: white; text-align: justify;">
@@ -23,9 +23,7 @@
                        border-bottom: 1px solid grey; 
                        border-bottom-right-radius: 5px;
                        border-bottom-left-radius: 5px;">
-                           Le musée du Louvre vous remercie de votre commande. Vous trouverez 
-                           ci-dessous un récapitulatif de votre commande ainsi que les informations
-                            vous permettant d'accéder au musée.
+                {{ 'louvre.mail.message'|trans }}
             </td>
         </tr>
         <tr>
@@ -43,26 +41,26 @@
                        background-color: #312C2C;
                        color: white;
                       ">
-                Informations de facturation
-                </td>
+                {{ 'louvre.accueil.facturation.titre'|trans }}
+            </td>
         </tr>
         <tr style="background-color: white; text-align: center;">
             <td style="border-left: 1px solid grey;
                        border-right: 1px solid grey;">
-                           Nom : {{ infos[0].commande.facturation.nomFacture }}
+                {{ 'louvre.accueil.label.nom'|trans }} : {{ infos[0].commande.facturation.nomFacture }}
             </td>
         </tr> 
         <tr style="background-color: white; text-align: center;">
             <td style="border-left: 1px solid grey;
                        border-right: 1px solid grey;">
-                           Prenom : {{ infos[0].commande.facturation.prenomFacture }}
+                {{ 'louvre.accueil.label.prenom'|trans }} : {{ infos[0].commande.facturation.prenomFacture }}
             </td>
         </tr>
 
         <tr style="background-color: white; text-align: center;">
             <td style="border-left: 1px solid grey;
                        border-right: 1px solid grey;">
-                            Date de naissance : {{ infos[0].commande.facturation.naissanceFacture|date("m/d/Y") }}
+                {{ 'louvre.accueil.label.date_nais'|trans }} : {{ infos[0].commande.facturation.naissanceFacture|date("m/d/Y") }}
             </td>
         </tr>
         
@@ -72,7 +70,7 @@
                        border-bottom: 1px solid grey; 
                        border-bottom-right-radius: 5px;
                        border-bottom-left-radius: 5px;">
-                            Adresse courriel : {{ infos[0].commande.facturation.courriel }}
+                {{ 'louvre.accueil.facturation.mail'|trans }} : : {{ infos[0].commande.facturation.courriel }}
             </td>
         </tr>
         <tr>
@@ -90,25 +88,25 @@
                        background-color: #312C2C;
                        color: white;
                       ">
-                Recapitulatif de commande
-                </td>
+                {{ 'louvre.accueil.validation.titre_r'|trans }}
+            </td>
         </tr>
         <tr style="background-color: white; text-align: center;">
             <td style="border-left: 1px solid grey;
                        border-right: 1px solid grey;"> 
-                            Jour de la visite : {{ infos[0].commande.dateReservation|date("m/d/Y") }}
+                {{ 'louvre.accueil.choix.date'|trans }} : {{ infos[0].commande.dateReservation|date("m/d/Y") }}
             </td>
         </tr>
         
         <tr style="background-color: white; text-align: center;">
             <td style="border-left: 1px solid grey;
                        border-right: 1px solid grey;"> 
-                           Type de billet(s) : 
-                           {% if infos[0].commande.demiJournee == true %}
-                                <span>Demi-journée</span>
-                            {% else %}
-                                <span>Journée</span>
-                            {% endif %}
+                {{ 'louvre.paiement.label.type'|trans }} : 
+                {% if infos[0].commande.demiJournee == true %}
+                    <span>{{ 'louvre.accueil.choix.demi'|trans }}</span>
+                {% else %}
+                    <span>{{ 'louvre.accueil.choix.jour'|trans }}</span>
+                {% endif %}
             </td>
         </tr>
         
@@ -118,7 +116,7 @@
                        border-bottom: 1px solid grey;
                        border-bottom-right-radius: 5px;
                        border-bottom-left-radius: 5px;">
-                            Nombre de visiteur : {{ infos[0].commande.qte }}
+                {{ 'louvre.paiement.label.nb'|trans }} : {{ infos[0].commande.qte }}
             </td>
         </tr>
         <tr>
@@ -136,32 +134,43 @@
                        background-color: #312C2C;
                        color: white;
                       ">
-                Billets
+                {{ 'louvre.mail.billets'|trans }}
+            </td>
+        </tr>
+        <tr style="background-color: white; text-align: center;">
+            <td style="border-left: 1px solid grey;
+                       border-right: 1px solid grey;
+                       border-bottom: 1px solid grey;">
+                <img src="{{ qrcode_data_uri(infos[0].commande.numCommande, { extension: 'png', size: 100 }) }}" />
+                {{ 'louvre.mail.reserv_code'|trans }} : {{ infos[0].commande.numCommande }}
             </td>
         </tr>    
         {% for billet in infos %}
             <tr style="background-color: white; text-align: center;">
                 <td style="border-left: 1px solid grey;
                            border-right: 1px solid grey;">
-                                {{ billet.nomBillet }} {{ billet.prenomBillet }}
+                    {{ billet.nomBillet }} {{ billet.prenomBillet }}
                 </td>
             </tr>
             <tr style="background-color: white; text-align: center;">
                 <td style="border-left: 1px solid grey;
                            border-right: 1px solid grey;">
-                               Tarif : {{ billet.tarifBillet }}
+                    {{ 'louvre.paiement.label.tarif'|trans }} : {{ billet.tarifBillet }}
                 </td>
             </tr>
             <tr style="background-color: white; text-align: center;">
                 <td style="border-left: 1px solid grey;
                            border-right: 1px solid grey;
                            border-bottom: 1px solid grey;">
-                               Prix hors reduction : {{ billet.prixBillet }}
+                    {{ 'louvre.paiement.label.prix'|trans }} : {{ billet.prixBillet }}
                 </td>
             </tr>
         {% endfor %}
         <tr style="text-align: right; ">
-            <td>Musée du Louvre© {{ 'now'|date('Y') }}</td>
+            <td>
+                {{ 'louvre.layout.copyright'|trans }} © 
+                {{ 'now'|date('Y') }}.
+            </td>
         </tr>
     </table>
 </div>

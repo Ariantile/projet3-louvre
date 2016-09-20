@@ -54,16 +54,43 @@ $(function () {
         $dateValide,
         $tarifReduit,
         $nbBillet,
-        regexDate = /^[0-3][0-9]\/[0-1][0-9]\/[1-2][901][0-9][0-9]$/,
-        regexNom = /^[a-zA-Z-'éíóúèìòùâêîôûëäïöüãñæçÉÍÓÚÈÌÒÙÂÊÎÔÛËÄÏÖÜÃÑÆÇ]+$/,
-        regexCourriel = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,10}$/,
-        $messageVide = '<p class="messageErreur">Doit comporter entre 2 et 30 caractères alphabétiques.</p>',
-        $messagePays = '<p class="messageErreur">Veuillez indiquer votre pays de résidence.</p>',
-        $messageDate = '<p class="messageErreur">Date incorrecte, format : JJ/MM/AAAA</p>',
-        $messageAge = '<p class="messageErreur">Entrée gratuite pour les moins de 4 ans.</p>',
-        $messageTarifReduit = '<p class="messageErreur">Tarif réduit non applicable.</p>',
-        $messageCourrielFormat = '<p class="messageErreur">Adresse courriel invalide, format : adresse@mail.com</p>',
-        $messageCourrielInval = '<p class="messageErreur">Le champ de confirmation doit être identique au champ courriel.</p>';
+        regexDate                   = /^[0-3][0-9]\/[0-1][0-9]\/[1-2][901][0-9][0-9]$/,
+        regexNom                    = /^[a-zA-Z-'éíóúèìòùâêîôûëäïöüãñæçÉÍÓÚÈÌÒÙÂÊÎÔÛËÄÏÖÜÃÑÆÇ]+$/,
+        regexCourriel               = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,10}$/,
+        $locale                     = $('#locale').text(),
+        
+        $labelBillet                = 'Billet n°',
+        $messageVideFr              = '<p class="messageErreur">Doit comporter entre 2 et 30 caractères alphabétiques.</p>',
+        $messagePaysFr              = '<p class="messageErreur">Veuillez indiquer votre pays de résidence.</p>',
+        $messageDateFr              = '<p class="messageErreur">Date incorrecte, format : JJ/MM/AAAA</p>',
+        $messageAgeFr               = '<p class="messageErreur">Entrée gratuite pour les moins de 4 ans.</p>',
+        $messageTarifReduitFr       = '<p class="messageErreur">Tarif réduit non applicable.</p>',
+        $messageCourrielFormatFr    = '<p class="messageErreur">Adresse courriel invalide, format : adresse@mail.com</p>',
+        $messageCourrielInvalFr     = '<p class="messageErreur">Le champ de confirmation doit être identique au champ courriel.</p>',
+        
+        $labelBilletEn              = 'Ticket n°',
+        $messageVideEn              = '<p class="messageErreur">From 2 to 30 alphabetic characters only.</p>',
+        $messagePaysEn              = '<p class="messageErreur">Please indicate your country of residence.</p>',
+        $messageDateEn              = '<p class="messageErreur">Invalid date, format : DD/MM/YYYY</p>',
+        $messageAgeEn               = '<p class="messageErreur">Free access for child aged under 4.</p>',
+        $messageTarifReduitEn       = '<p class="messageErreur">Reduced rate not applicable.</p>',
+        $messageCourrielFormatEn    = '<p class="messageErreur">Invalid email addresse, format : addresse@mail.com</p>',
+        $messageCourrielInvalEn     = '<p class="messageErreur">Both email fields must be identical.</p>',
+    
+        $tarifDescM4Fr              = 'Enfant de moins de 4 ans : Entrée gratuite',
+        $tarifDescReFr              = 'Tarif réduit unique',
+        $tarifDescEnfFr             = 'Tarif enfant, de 4 à 11 ans',
+        $tarifDescNmFr              = 'Tarif normal, de 12 à 59 ans',
+        $tarifDescSeFr              = 'Tarif senior, 60 ans et plus',
+        $tarifDescInvFr             = 'Date de naissance invalide',
+        
+        $tarifDescM4En              = 'Child aged under 4 : Free access',
+        $tarifDescReEn              = 'Unique reduced rate',
+        $tarifDescEnfEn             = 'Child rate, from 4 to 11 years old',
+        $tarifDescNmEn              = 'Normal rate, from 12 to 59 years old',
+        $tarifDescSeEn              = 'Senior rate, from 60 years old',
+        $tarifDescInvEn             = 'Invalid date of birth';
+    
 
     /**********************************************************************************************
     *********************** FONCTIONS *************************************************************
@@ -114,7 +141,7 @@ $(function () {
         
         if ($testPanier === true) {
             
-            $('div.' + billet.idBillet + ' > p.nomPanier').text('Nom : ' + billet.nomBillet);
+            $('div.' + billet.idBillet + ' > p.nomPanier').text(billet.nomBillet);
             $('div.' + billet.idBillet + ' > p.tarifPanier').text(billet.nomTarif + ' : ' + billet.prixTarif + '€');
             
         } else {
@@ -124,8 +151,8 @@ $(function () {
                 $ajoutTarif = $('<p class="tarifPanier"></p>');
             
             $ajoutPanier.addClass(billet.idBillet);
-            $ajoutNom.text('Nom : ' + billet.nomBillet);
-            $ajoutPrenom.text(' Prenom : ' + billet.prenomBillet);
+            $ajoutNom.text(billet.nomBillet);
+            $ajoutPrenom.text(billet.prenomBillet);
             $ajoutTarif.text(billet.nomTarif + ' : ' + billet.prixTarif + '€');
             
             $ajoutPanier.append($ajoutNom);
@@ -143,7 +170,11 @@ $(function () {
         }
                     
         if ($('#commande_demiJournee_1').is(':checked')) {
-            $('#totalPanier').text('TOTAL (-50% demi-journée) : ' + ($prixTotal/2) + '€');
+            if ($locale === 'FR') {
+                $('#totalPanier').text('TOTAL (-50% demi-journée) : ' + ($prixTotal/2) + '€');
+            } else if ($locale === 'EN') {
+                $('#totalPanier').text('TOTAL (50% off for half-day) : ' + ($prixTotal/2) + '€');
+            }
         } else {
             $('#totalPanier').text('TOTAL : ' + $prixTotal + '€');
         }
@@ -227,7 +258,16 @@ $(function () {
     
     function testFormDate(date) {
         
+        var $messageDate;
+        
         if (date.val().length < 10 || date.val() === '' || date.val() === null || !regexDate.test(date.val())) {
+            
+            if ($locale === 'FR') {
+                $messageDate = $messageDateFr;
+            } if ($locale === 'EN') {
+                $messageDate = $messageDateEn;
+            }
+            
             addErreurs(date, $messageDate);
             $checkDate = 1;
         
@@ -236,6 +276,13 @@ $(function () {
             isValidDate(date.val());
            
             if ($dateValide === 1) {
+                
+                if ($locale === 'FR') {
+                    $messageDate = $messageDateFr;
+                } if ($locale === 'EN') {
+                    $messageDate = $messageDateEn;
+                }
+                
                 addErreurs(date, $messageDate);
                 $checkDate = 1;
             } else if (date.hasClass('champVide')) {
@@ -266,7 +313,16 @@ $(function () {
     
     function testFormBillet(nom, prenom, pays, date) {
         
+        var $messageVide,
+            $messagePays;
+        
         if (nom.val().length <= 1 || nom.val().length > 30 || nom.val() === '' || !regexNom.test(nom.val())) {
+            
+            if ($locale === 'FR') {
+                $messageVide = $messageVideFr;
+            } if ($locale === 'EN') {
+                $messageVide = $messageVideEn;
+            }
             
             addErreurs(nom, $messageVide);
             $checkNom = 1;
@@ -280,7 +336,13 @@ $(function () {
         }
         
         if (prenom.val().length <= 1 || nom.val().length > 30 || prenom.val() === '') {
-        
+            
+            if ($locale === 'FR') {
+                $messageVide = $messageVideFr;
+            } if ($locale === 'EN') {
+                $messageVide = $messageVideEn;
+            }
+            
             addErreurs(prenom, $messageVide);
             $checkPrenom = 1;
 
@@ -293,6 +355,12 @@ $(function () {
         }
         
         if (pays.val() === null || pays.val() === '') {
+            
+            if ($locale === 'FR') {
+                $messagePays = $messagePaysFr;
+            } if ($locale === 'EN') {
+                $messagePays = $messagePaysEn;
+            }
             
             addErreurs(pays, $messagePays);
             $checkPays = 1;
@@ -309,7 +377,15 @@ $(function () {
     
     function testCourriel (courriel) {
         
+        var $messageCourrielFormat;
+        
         if (!regexCourriel.test(courriel.val())) {
+            
+            if ($locale === 'FR') {
+                $messageCourrielFormat = $messageCourrielFormatFr;
+            } if ($locale === 'EN') {
+                $messageCourrielFormat = $messageCourrielFormatEn;
+            }
             
             addErreurs(courriel, $messageCourrielFormat);
             $checkCourriel = 1;
@@ -326,7 +402,16 @@ $(function () {
     }
     
     function testCourrielValid (courriel, validCourriel) {
+        
+        var $messageCourrielInval;
+        
         if (courriel.val() != validCourriel.val()) {
+            
+            if ($locale === 'FR') {
+                $messageCourrielInval = $messageCourrielInvalFr;
+            } if ($locale === 'EN') {
+                $messageCourrielInval = $messageCourrielInvalEn;
+            }
             
             addErreurs(validCourriel, $messageCourrielInval);
             $checkCourriel = 1;
@@ -371,13 +456,21 @@ $(function () {
         } else {
             $age = false;
         }
-                    
+        
         if ($age < 4) {
             $tarif = 0;
-            $tarifDesc = 'Enfant de moins de 4 ans : Entrée gratuite';
+            if ($locale === 'FR') {
+                $tarifDesc = $tarifDescM4Fr;
+            } else if ($locale === 'EN') {
+                $tarifDesc = $tarifDescM4En;
+            }
         } else if ($tarifReduit === 1 && $age >= 12) {
             $tarif = 10;
-            $tarifDesc = 'Tarif réduit unique';
+            if ($locale === 'FR') {
+                $tarifDesc = $tarifDescReFr;
+            } else if ($locale === 'EN') {
+                $tarifDesc = $tarifDescReEn;
+            }
             $nomTarif = 'reduit';
             $checkTarif = 0;
             if ($('#commande_billets_' + $indexBillet + '_tarifReduit').hasClass('champVide')) {
@@ -385,28 +478,64 @@ $(function () {
             }
         } else if ($age >= 4 && $age < 12) {
             $tarif = 8;
-            $tarifDesc = 'Tarif enfant, de 4 à 11 ans';
+            if ($locale === 'FR') {
+                $tarifDesc = $tarifDescEnfFr;
+            } else if ($locale === 'EN') {
+                $tarifDesc = $tarifDescEnfEn;
+            }
             $nomTarif = 'enfant';
         } else if ($age >= 12 && $age < 60) {
             $tarif = 16;
-            $tarifDesc = 'Tarif normal, de 12 à 59 ans';
+            if ($locale === 'FR') {
+                $tarifDesc = $tarifDescNmFr;
+            } else if ($locale === 'EN') {
+                $tarifDesc = $tarifDescNmEn;
+            }
             $nomTarif = 'normal';
         } else if ($age >= 60) {
             $tarif = 12;
-            $tarifDesc = 'Tarif senior, 60 ans et plus';
+            if ($locale === 'FR') {
+                $tarifDesc = $tarifDescSeFr;
+            } else if ($locale === 'EN') {
+                $tarifDesc = $tarifDescSeEn;
+            }
             $nomTarif = 'senior';
         } else {
             $tarif = 0;
-            $tarifDesc = 'Date de naissance invalide.';
+            if ($locale === 'FR') {
+                $tarifDesc = $tarifDescInvFr;
+            } else if ($locale === 'EN') {
+                $tarifDesc = $tarifDescInvEn;
+            }
             $nomTarif = 'invalide';
         }
         
         if ($tarifReduit === 1 && $age < 12){ 
+            
+            var $messageTarifReduit;
+            
             $checkTarif = 1;
+            
+            if ($locale === 'FR') {
+                $messageTarifReduit = $messageTarifReduitFr;
+            } else if ($locale === 'EN') {
+                $messageTarifReduit = $messageTarifReduitEn;
+            }
+            
             addErreurs($('#commande_billets_' + $indexBillet + '_tarifReduit'), $messageTarifReduit);
             return false;
         } else if ($age < 4 || $tarif === 0) {
+            
+            var $messageAge;
+            
             $checkTarif = 1;
+            
+            if ($locale === 'FR') {
+                $messageAge = $messageAgeFr;
+            } else if ($locale === 'EN') {
+                $messageAge = $messageAgeEn;
+            }
+            
             addErreurs($('#commande_billets_' + $indexBillet + '_naissanceBillet'), $messageAge);
             return false;
         }
@@ -743,6 +872,10 @@ $(function () {
         minDate: $pickerReserv,
         beforeShowDay: function (date) {
             if ((date.getDay() === 2)
+                    || (date.getDay() === 0)
+                    || ((date.getDate() === 1)  && (date.getMonth() === 0))
+                    || ((date.getDate() === 14) && (date.getMonth() === 6))
+                    || ((date.getDate() === 15) && (date.getMonth() === 7))
                     || ((date.getDate() === 1)  && (date.getMonth() === 4))
                     || ((date.getDate() === 1)  && (date.getMonth() === 10))
                     || ((date.getDate() === 25) && (date.getMonth() === 11))
@@ -789,18 +922,31 @@ $(function () {
         if (($heureConnexion >= 18) && ($dateConnexion === $('.dateReserv').val())) {
             $('#commande_demiJournee_0').attr('checked', false).prop('disabled', true);
             $('#commande_demiJournee_1').attr('checked', false).prop('disabled', true);
-            $('#dateVisite').text('Heure de visite dépassée pour cette date.').css('color', 'red');
-            $('#typeBillet').text('Aucun type de billet selectionné.');
+            if ($locale === 'FR') {
+                $('#dateVisite').text('Heure de visite dépassée pour cette date').css('color', 'red');
+                $('#typeBillet').text('Aucun type de billet selectionné');
+            } else if ($locale === 'EN') {
+                $('#dateVisite').text('Hour of visit exceeded').css('color', 'red');
+                $('#typeBillet').text('No ticket\'s type selected');
+            }
             $('#next1').prop('disabled', true);
         } else if (($heureConnexion >= 14) && ($dateConnexion === $('.dateReserv').val())) {
             $('#commande_demiJournee_0').attr('checked', false).prop('disabled', true);
             $('#commande_demiJournee_1').attr('checked', false).prop('disabled', false);
-            $('#typeBillet').text('Demi-journée');
+            if ($locale === 'FR') {
+                $('#typeBillet').text('Demi-journée');
+            } else if ($locale === 'EN') {
+                $('#typeBillet').text('Half-day');
+            }
             $('#dateVisite').css('color', 'black');
         } else {
             $('#commande_demiJournee_0').attr('checked', false).prop('disabled', false);
             $('#commande_demiJournee_1').attr('checked', false).prop('disabled', false);
-            $('#typeBillet').text('Aucun type de billet selectionné.');
+            if ($locale === 'FR') {
+                $('#typeBillet').text('Aucun type de billet selectionné');  
+            } else if ($locale === 'EN') {
+                $('#typeBillet').text('No ticket\'s type selected');
+            }
             $('#dateVisite').css('color', 'black');
         }
     });
@@ -814,17 +960,30 @@ $(function () {
             $('#next1').prop('disabled', false);
         }
         if ($('#commande_demiJournee_0').is(':checked')) {
-            $('#typeBillet').text('Journée');
+            if ($locale === 'FR') {
+                $('#typeBillet').text('Journée');  
+            } else if ($locale === 'EN') {
+                $('#typeBillet').text('Day');
+            }
             $('#addBillet').prop('disabled', false);
             $('#supBillet').prop('disabled', false);
             $('#totalPanier').text('TOTAL : ' + $prixTotal + '€');
         } else if ($('#commande_demiJournee_1').is(':checked')) {
-            $('#typeBillet').text('Demi-journée');
+            if ($locale === 'FR') {
+                $('#typeBillet').text('Demi-journée');  
+                $('#totalPanier').text('TOTAL (-50% demi-journée) : ' + ($prixTotal/2) + '€');
+            } else if ($locale === 'EN') {
+                $('#typeBillet').text('Half-day');
+                $('#totalPanier').text('TOTAL (50% off for half-day) : ' + ($prixTotal/2) + '€');
+            }
             $('#addBillet').prop('disabled', false);
             $('#supBillet').prop('disabled', false);
-            $('#totalPanier').text('TOTAL (-50% demi-journée) : ' + ($prixTotal/2) + '€');
         } else if ($('#commande_demiJournee_0').is(':not:checked') && $('#commande_demiJournee_1').is(':not:checked')) {
-            $('#typeBillet').text('Aucun type de billet selectionné.');
+            if ($locale === 'FR') {
+                $('#typeBillet').text('Aucun type de billet selectionné');  
+            } else if ($locale === 'EN') {
+                $('#typeBillet').text('No ticket\'s type selected');
+            }
             $('#addBillet').prop('disabled', true);
             $('#supBillet').prop('disabled', true);
             $('#subForm').prop('disabled', true);
@@ -878,7 +1037,11 @@ $(function () {
                 if (index === 0) {
                     $('#bloc_billet').hide();
                     $('#bloc_facturation').hide();
-                    $('#nbPersonne').text('Aucun billet ajouté au panier.');
+                    if ($locale === 'FR') {
+                        $('#nbPersonne').text('Aucun billet dans le panier');  
+                    } else if ($locale === 'EN') {
+                        $('#nbPersonne').text('Basket empty');
+                    }
                     $('#next1').prop('disabled', true);
                 }
             }
@@ -892,8 +1055,14 @@ $(function () {
         
         function addBillet($container) {
             
+            if ($locale === 'EN') {
+                var $labelBilletAdd = $labelBilletEn;
+            } else if ($locale === 'FR') {
+                var $labelBilletAdd = $labelBillet;
+            }
+            
             var template = $container.attr('data-prototype')
-                    .replace(/__name__label__/g, 'Billet n°' + (index + 1))
+                    .replace(/__name__label__/g, $labelBilletAdd + (index + 1))
                     .replace(/__name__/g,        index),
                 $prototype = $(template).addClass('well hideBillet blocUnBillet'+index);
 
@@ -938,7 +1107,11 @@ $(function () {
                 $('div.commande_billets_'+ (index - 1) ).remove();
                 
                 if ($('#commande_demiJournee_1').is(':checked')) {
-                    $('#totalPanier').text('TOTAL (-50% demi-journée) : ' + ($prixTotal/2) + '€');
+                    if ($locale === 'FR') {
+                        $('#totalPanier').text('TOTAL (-50% demi-journée) : ' + ($prixTotal/2) + '€');
+                    } else if ($locale === 'EN') {
+                        $('#totalPanier').text('TOTAL (50% off for half-day) : ' + ($prixTotal/2) + '€');
+                    }
                 } else {
                     $('#totalPanier').text('TOTAL : ' + $prixTotal + '€');
                 }

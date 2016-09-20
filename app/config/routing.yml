@@ -1,7 +1,17 @@
+# app/config/routing.yml
+
 louvre_billetterie:
     resource: "@LouvreBilletterieBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|fr
+
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /en/
+        permanent: true
 
 payum_capture:
     resource: "@PayumBundle/Resources/config/routing/capture.xml"
-    
-

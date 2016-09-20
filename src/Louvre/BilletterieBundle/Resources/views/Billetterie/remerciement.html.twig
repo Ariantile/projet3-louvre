@@ -1,4 +1,26 @@
 {% extends "LouvreBilletterieBundle:Billetterie:validation.html.twig" %}
-{% block boutton %}
+{% block remerciement %}
+    <div class="intForm remerciement">
+        <h2>
+            {{ 'louvre.remerciement.titre'|trans }}!
+        </h2>
+        <p>
+            {% trans %}
+                louvre.remerciement.message1
+            {% endtrans %}
+            
+            <br><br>
+            
+            {% trans %}
+                louvre.remerciement.message2
+            {% endtrans %}
+            
+            <br><br>
+            
+            {% trans %}
+                louvre.remerciement.message3 
+            {% endtrans %}
+        </p>
+    </div>
     {{ parent() }}
 {% endblock %}

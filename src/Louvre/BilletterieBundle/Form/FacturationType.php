@@ -22,29 +22,33 @@ class FacturationType extends AbstractType
     {
         $builder
             ->add('nomFacture', TextType::class, array(
+                  'label'       => 'louvre.accueil.label.nom',
                   'attr'        => array(
-                  'maxlength'    => '30',
+                  'maxlength'   => '30',
                   'class'       => 'nom')))
             ->add('prenomFacture', TextType::class, array(
+                  'label'       => 'louvre.accueil.label.prenom',
                   'attr'        => array(
-                  'maxlength'    => '30',
+                  'maxlength'   => '30',
                   'class'       => 'prenom')))
             ->add('pays', CountryType::class, array(
-                  'placeholder' => 'Pays de résidence'))
+                  'label'       => 'louvre.accueil.label.pays',
+                  'placeholder' => 'louvre.accueil.label.pays_place'))
             ->add('naissanceFacture', DateType::class, array(
+                  'label'       => 'louvre.accueil.label.date_nais',
                   'widget'      => 'single_text',
                   'input'       => 'datetime',
                   'format'      => 'dd/MM/yyyy',
                   'attr'        => array(
                   'class'       => 'dateFacturation',
-                  'placeholder' => 'jj/mm/aaaa',
+                  'placeholder' => 'louvre.accueil.choix.date_place',
                   'maxlength'   => '10'),))
             ->add('courriel', RepeatedType::class, array(
                   'type'            => EmailType::class,
-                  'invalid_message' => 'Les deux adresses courriel doivent être identiques.',
+                  'invalid_message' => 'louvre.accueil.courriel.error',
                   'required'        => true,
-                  'first_options'   => array('label' => 'Courriel'),
-                  'second_options'  => array('label' => 'Confirmation courriel'),
+                  'first_options'   => array('label' => 'louvre.accueil.facturation.mail'),
+                  'second_options'  => array('label' => 'louvre.accueil.facturation.mail_cf'),
             ));
     }
     

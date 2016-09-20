@@ -6,7 +6,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{% block title %}Billeterie du musée du Louvre{% endblock %}</title>
+        <title>
+           {% block title %}
+                {{ 'louvre.layout.titre_page'|trans }}
+            {% endblock %}
+        </title>
 
         {% block stylesheets %}
             <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -21,22 +25,20 @@
         <div class="container bloc-head">      
             <div class="row">
                 <div class="col-sm-5 col-xs-12 logoTitre">
-                    <p>Louvre Billetterie</p>
+                    <p>
+                        {{ 'louvre.layout.titre'|trans }} - 
+                        <span id="locale">{{ app.request.getLocale()|upper }}</span>
+                    </p>
                 </div>
                 <div class="col-sm-7 col-xs-12 traduction">
-                    <img src="{{ asset('bundles/louvrebilletterie/images/fr.png') }}" alt="Traduction française" class="drapfr"/>
-                    <img src="{{ asset('bundles/louvrebilletterie/images/gb.png') }}" alt="Traduction anglaise" />
-                    <button id="btPanier" type="button">
-                        <span id="icoPanier" class="glyphicon glyphicon-shopping-cart"></span>
-                    </button>
+                    {% block header %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
    </header>
    
     <section>
-        {% block header %}
-        {% endblock %}
         {% block content %}
         {% endblock %}
     </section>
@@ -44,14 +46,18 @@
     <footer>
         <div class="container contFooter">
             <div class="row topFooter">
-                <div class="col-sm-6 col-xs-12">
+                <div class="col-sm-6 col-xs-12 lost">
                     <p>
-                        Billet perdu ? Indiquez l'adresse courriel utilisée lors de votre achat,
-                        un nouveau courriel vous sera envoyé contenant vos billets.
+                        {{ 'louvre.layout.lost_label'|trans }} 
+                        <a href="{{ path('louvre_billet_recover') }}">
+                            {{ 'louvre.layout.lost_lien'|trans }}
+                        </a>.
                     </p>
                 </div>
                 <div class="col-sm-6 col-xs-12 paiement">
-                    <h2>Moyen de paiement</h2>
+                    <h2>
+                        {{ 'louvre.layout.moyen_paiement'|trans }}
+                    </h2>
                     <div class="carte">
                         <img src="{{ asset('bundles/louvrebilletterie/images/cbvisa.png') }}" alt="Visa" />
                         <img src="{{ asset('bundles/louvrebilletterie/images/cbmaster.png') }}" alt="Master card" />
@@ -62,15 +68,22 @@
             </div>
             <div class="row CgvMentions">
                 <div class="col-xs-6">
-                    <a href="#">Mentions légales</a>
+                    <a href="#">
+                        {{ 'louvre.layout.mentions.link'|trans }}
+                    </a>
                 </div>
                 <div class="col-xs-6">
-                    <a href="#" class="cgv">Conditions générales de vente</a>
+                    <a href="#" class="cgv">
+                        {{ 'louvre.layout.cgv.link'|trans }}
+                    </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <p class="copy">Musée du Louvre© {{ 'now'|date('Y') }}.</p>
+                    <p class="copy">
+                        {{ 'louvre.layout.copyright'|trans }} © 
+                        {{ 'now'|date('Y') }}.
+                    </p>
                 </div>
             </div>
         </div>

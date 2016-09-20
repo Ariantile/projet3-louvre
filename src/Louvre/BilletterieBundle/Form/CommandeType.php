@@ -28,13 +28,12 @@ class CommandeType extends AbstractType
                   'format'       => 'dd/MM/yyyy',
                   'attr'         => array(
                   'class'        => 'dateReserv',
-                  'placeholder'  => 'jj/mm/aaaa',
                   'maxlength'    => '10',
                   'readonly'     => 'true'),))
             ->add('demiJournee', ChoiceType::class, array(
                   'choices'      => array(
-                  'Journée'      => false,
-                  'Demi-journée' => true,),
+                  'louvre.accueil.choix.jour' => false,
+                  'louvre.accueil.choix.demi' => true,),
                   'expanded'     => true,
                   'multiple'     => false,
                   'label'        => 'Type de billet'))

@@ -1,0 +1,84 @@
+# src/Louvre/BilletterieBundle/Ressources/Translations/messages.en.yml
+ 
+louvre.layout.titre_page:           Louvre museum ticketing
+louvre.layout.titre:                Louvre ticketing
+louvre.layout.lost_label:           Tickets lost?
+louvre.layout.lost_lien:            Click here
+louvre.layout.moyen_paiement:       Payment methods
+louvre.layout.mentions.link:        Legal notices
+louvre.layout.cgv.link:             Conditions of Use & Sale
+louvre.layout.copyright:            Louvre museum
+ 
+louvre.accueil.horaire.titre:       Opening hours
+louvre.accueil.horaire.message1:    The museum is opened daily from 9.00 - 18.00, except tuesday.
+louvre.accueil.horaire.message2:    (Room closing from 17.30)
+
+louvre.accueil.securite.titre:      Safety regulations
+louvre.accueil.securite.message:    We do not recommend bringing bags and luggage to the museum. They will be checked and drop off in the locker room in all cases.
+
+louvre.accueil.reduit.titre:        Reduced rate
+louvre.accueil.reduit.message1:     If you choose to apply a reduced rate, supporting documents will be asked at the museum's entrance.
+louvre.accueil.reduit.message2:     Students, museum and Ministry of Culture employees, and militaries are concerned by this rate.
+
+louvre.accueil.choix.date:          Visit date
+louvre.accueil.choix.date_place:    dd/mm/yyyy
+louvre.accueil.choix.type:          Choose your type of tickets
+louvre.accueil.choix.jour:          Day
+louvre.accueil.choix.demi:          Half-day
+louvre.accueil.choix.nb:            How many visitors will come?
+louvre.accueil.debut_but:           Begin
+
+louvre.accueil.billet.titre:        Ticket's information
+
+louvre.accueil.label.nom:           Last name
+louvre.accueil.label.prenom:        First name
+louvre.accueil.label.date_nais:     Birthdate
+louvre.accueil.label.pays:          Country of residence 
+louvre.accueil.label.pays_place:    Country of residence
+louvre.accueil.label.panier:        Basket
+louvre.accueil.panier.date_vide:    No date selected
+louvre.accueil.panier.type_vide:    No ticket's type selected
+louvre.accueil.panier.billet_vide:  Basket empty
+louvre.accueil.choix.tarif_red:     Reduced rate?
+
+louvre.accueil.facturation.titre:   Billing information
+louvre.accueil.facturation.mail:    Email address
+louvre.accueil.facturation.mail_cf: Email address confirmation
+louvre.accueil.courriel.error:      Both your email addresses must be identical.
+
+louvre.accueil.validation.titre_f:  Billing information
+louvre.accueil.validation.titre_r:  Your order
+
+louvre.paiement.label.nom:          Last and first name
+louvre.paiement.label.type:         Type of ticket
+louvre.paiement.label.nb:           Number of visitors
+louvre.paiement.label.tarif:        Rate
+louvre.paiement.label.prix:         Price without reduction
+
+louvre.paiement.lien.retour:        Home
+
+louvre.stripe.label.total:          Amount to be paid
+
+louvre.remerciement.titre:          Thank you for your order
+louvre.remerciement.message1:       Louvre museum thanks you for your order.
+louvre.remerciement.message2:       You will received an email shortly with your order. This email will be used as a ticket and must be presented at the entrance of the museum.
+louvre.remerciement.message3:       We are looking forward to your visit et we wish you a pleasant tour.
+
+louvre.accueil.next_but:            Next
+louvre.accueil.back_but:            Back
+louvre.accueil.paie_but:            Pay
+
+louvre.flash.erreur.session:        session expired or invalid
+louvre.flash.erreur.billet:         Max amount of visitor exceeded for this date
+
+louvre.recover.message:             Please indicate the email address used for your order. If the address is bind to a valid order, a new email will be sent to you shortly.
+louvre.recover.titre:               Ticket recovery
+louvre.recover.label:               Order email address
+louvre.recover.erreur:              The email address is invalid or not bind to an order
+louvre.recover.submit:              Send
+louvre.recover.reussite:            Order found, you will receive an email shortly
+
+louvre.mail.titre:                  Louvre ticketing
+louvre.mail.message:                Louvre museum thanks you for your order. You will find bellow your order summary and the necessary information to enter in the museum.
+louvre.mail.billets:                Ticket(s)
+louvre.mail.reserv_code:            Booking code

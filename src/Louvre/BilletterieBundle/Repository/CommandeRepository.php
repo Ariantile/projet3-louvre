@@ -10,4 +10,18 @@ namespace Louvre\BilletterieBundle\Repository;
  */
 class CommandeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function renvoiBillet ($courriel){
+        
+        $qb = $this
+            ->createQueryBuilder('c')
+            ->innerJoin('c.facturation', 'fac')
+            ->addSelect('fac')
+            ->where('fac.courriel = :courriel')
+            ->setParameter('courriel', $courriel);
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+        
+    }
 }

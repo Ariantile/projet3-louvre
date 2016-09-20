@@ -25,6 +25,19 @@ class BilletRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
         
+    }
+    
+    public function countBillet ($date){
+
+        $qb = $this
+            ->createQueryBuilder('b')
+            ->innerJoin('b.commande', 'com')
+            ->select('COUNT(b)') 
+            ->where('com.dateReservation = :date')
+            ->setParameter('date', $date);
         
-    }    
+        $result = $qb->getQuery()->getSingleScalarResult();
+        
+        return $result;
+    }
 }

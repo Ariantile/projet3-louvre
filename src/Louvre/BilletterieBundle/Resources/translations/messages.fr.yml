@@ -1,0 +1,86 @@
+# src/Louvre/BilletterieBundle/Ressources/Translations/messages.fr.yml
+
+louvre.layout.titre_page:           Billeterie du musée du Louvre
+louvre.layout.titre:                Louvre Billetterie
+louvre.layout.lost_label:           Billet perdu ?
+louvre.layout.lost_lien:            Cliquez ici
+louvre.layout.moyen_paiement:       Moyen de paiement
+louvre.layout.mentions.link:        Mentions légales
+louvre.layout.cgv.link:             Conditions générales de vente
+louvre.layout.copyright:            Musée du Louvre
+
+louvre.accueil.horaire.titre:       Horaires d'ouverture
+louvre.accueil.horaire.message1:    Le musée est ouvert tous les jours de 9h à 18h excepté le mardi.
+louvre.accueil.horaire.message2:    (Fermeture des salles à partir de 17h30)
+
+louvre.accueil.securite.titre:      Rappel de securité   
+louvre.accueil.securite.message:    Il n'est pas recommandé de venir au musée avec des sacs et des valises. Ils seront dans tous les cas déposés au vestiaire après avoir été contrôlés.
+
+louvre.accueil.reduit.titre:        Tarif réduit
+louvre.accueil.reduit.message1:     Si vous choisissez d'appliquer le tarif réduit, un justificatif vous sera demandé à l''entrée.
+louvre.accueil.reduit.message2:     "Sont concernés par ce tarif : les étudiants, les employés du musée ou d’un service du Ministère de la Culture, et les militaires."
+
+louvre.accueil.choix.date:          Date de visite
+louvre.accueil.choix.date_place:    jj/mm/aaaa
+louvre.accueil.choix.type:          Choisissez votre type de billet
+louvre.accueil.choix.jour:          Journée
+louvre.accueil.choix.demi:          Demi-journée
+louvre.accueil.choix.nb:            Veuillez indiquer le nombre de visiteur
+louvre.accueil.debut_but:           Débuter
+
+louvre.accueil.billet.titre:        Informations nominatives de billet
+
+louvre.accueil.label.nom:           Nom
+louvre.accueil.label.prenom:        Prenom
+louvre.accueil.label.date_nais:     Date de naissance
+louvre.accueil.label.pays:          Pays de résidence
+louvre.accueil.label.pays_place:    Pays de résidence
+louvre.accueil.label.panier:        Panier
+louvre.accueil.panier.date_vide:    Aucune date selectionnée
+louvre.accueil.panier.type_vide:    Aucun type de billet selectionné
+louvre.accueil.panier.billet_vide:  Aucun billet dans le panier
+louvre.accueil.choix.tarif_red:     Tarif réduit?
+
+louvre.accueil.facturation.titre:   Informations de facturation
+louvre.accueil.facturation.mail:    Courriel
+louvre.accueil.facturation.mail_cf: Confirmation courriel
+louvre.accueil.courriel.error:      Les deux adresses courriel doivent être identiques.
+
+louvre.accueil.validation.titre_f:  Facturation
+louvre.accueil.validation.titre_r:  Récapitulatif de la commande
+
+louvre.paiement.label.nom:          Nom et prenom
+louvre.paiement.label.type:         Type de billet
+louvre.paiement.label.nb:           Nombre de visiteurs
+louvre.paiement.label.tarif:        Tarif
+louvre.paiement.label.prix:         Prix hors réduction
+
+louvre.paiement.lien.retour:        Accueil
+
+louvre.stripe.label.total:          Total à payer
+
+louvre.remerciement.titre:          Merci de votre commande
+louvre.remerciement.message1:       Le musée du Louvre vous remercie de votre commande.
+louvre.remerciement.message2:       Vous recevrez sous peu un courriel contenant un récapitulatif de votre commande. Ce courriel fera foi de billet et devra être présenté à l'entrée du musée.
+louvre.remerciement.message3:       Nous nous rejouissons de vous accueillir bientôt au musée  et nous vous souhaitons une agréable visite.
+
+louvre.accueil.next_but:            Suivant
+louvre.accueil.back_but:            Précédent
+louvre.accueil.paie_but:            Paiement
+
+louvre.flash.erreur.session:        Session expirée ou inexistante
+louvre.flash.erreur.billet:         Nombre de visiteur dépassé pour cette date
+
+louvre.recover.message:             Veuillez indiquez l'adresse courriel utilisée lors de votre commande. Si l'adresse est liée à une commande valide, un nouveau courriel vous sera envoyé sous peu.
+louvre.recover.titre:               Récupération de billet
+louvre.recover.label:               Courriel de la commande
+louvre.recover.erreur:              L'adresse courriel fournie est invalide ou n'est pas lié à une commande
+louvre.recover.submit:              Envoyer
+louvre.recover.reussite:            Commande trouvée, vous recevrez un courriel sous peu
+
+louvre.mail.titre:                  Louvre billetterie
+louvre.mail.message:                Le musée du Louvre vous remercie de votre commande. Vous trouverez ci-dessous un récapitulatif de votre commande ainsi que les informations vous permettant d'accéder au musée.
+louvre.mail.billets:                Billet(s)
+louvre.mail.reserv_code:            Code de reservation
+
+louvre.form.validation.length:      Doit comporter entre 2 et 30 caractères alphabétiques.

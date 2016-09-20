@@ -1,0 +1,21 @@
+{% extends "LouvreBilletterieBundle:Billetterie:layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    <a href="{{ url('louvre_core_homepage') }}" class="lienretour">
+        {{ 'louvre.paiement.lien.retour'|trans }}
+    </a>
+{% endblock %}
+
+{% block content %}
+<div id="headAccueil" class="container">
+    <div id="ancreFormAcc" class="row">
+        {% block form %}
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}

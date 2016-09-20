@@ -1,10 +1,22 @@
 {% extends "LouvreBilletterieBundle:Billetterie:layout.html.twig" %}
 
 {% block title %}
-  Page d'accueil - {{ parent() }}
+    {{ parent() }}
 {% endblock %}
 
 {% block header %}
+    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">
+        <img src="{{ asset('bundles/louvrebilletterie/images/fr.png') }}" alt="Traduction française" class="drapfr"/>
+    </a>
+    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">
+        <img src="{{ asset('bundles/louvrebilletterie/images/gb.png') }}" alt="Traduction anglaise" />
+    </a>
+    <button id="btPanier" type="button">
+        <span id="icoPanier" class="glyphicon glyphicon-shopping-cart"></span>
+    </button>
+{% endblock %}
+
+{% block content %}
 <div id="headAccueil" class="container">
     <div id="ancreFormAcc" class="row">
         {% block form %}
@@ -12,13 +24,4 @@
     </div>
 </div>
 
-{% endblock %}
-
-{% block content %}
-
-    {# Message flash #}
-    {% for message in app.session.flashbag.get('info') %}
-        <div class="alert alert-info">Message flash : {{ message }}</div>
-    {% endfor %}
-         
 {% endblock %}

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Louvre\BilletterieBundle\Repository\FacturationRepository")
  */
 class Facturation
-{
+{    
     /**
      * @var int
      *
@@ -68,7 +68,17 @@ class Facturation
      * @Assert\Email(checkMX = true) 
      */
     private $courriel;
-
+    
+    /**
+     * Get commande
+     *
+     * @return \Louvre\BilletterieBundle\Entity\Commande
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+    
     /**
      * Get id
      *

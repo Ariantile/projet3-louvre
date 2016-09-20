@@ -21,27 +21,31 @@ class BilletType extends AbstractType
     {
         $builder
             ->add('nomBillet', TextType::class, array(
+                  'label'       => 'louvre.accueil.label.nom',
                   'attr'        => array(
                   'maxlength'   => '30',
                   'class'       => 'nom')))
             ->add('prenomBillet', TextType::class, array(
+                  'label'       => 'louvre.accueil.label.prenom',
                   'attr'        => array(
                   'maxlength'   => '30',
                   'class'       => 'prenom')))
             ->add('paysBillet', CountryType::class, array(
-                  'placeholder' => 'Pays de résidence'))
+                  'label'       => 'louvre.accueil.label.pays',
+                  'placeholder' => 'louvre.accueil.label.pays_place'))
             ->add('naissanceBillet', DateType::class, array(
                   'widget'      => 'single_text',
                   'input'       => 'datetime',
                   'format'      => 'dd/MM/yyyy',
+                  'label'       => 'louvre.accueil.label.date_nais',
                   'attr'        => array(
                   'class'       => 'dateBillets',
-                  'placeholder' => 'jj/mm/aaaa',
+                  'placeholder' => 'louvre.accueil.choix.date_place',
                   'maxlength'   => '10'),))
             ->add('tarifReduit', CheckboxType::class, array (
                   'mapped'      => false,
                   'required'    => false,
-                  'label'       => 'Tarif réduit?',))
+                  'label'       => 'louvre.accueil.choix.tarif_red',))
             ->add('prixBillet', NumberType::class, array(
                   'label'       => false,
                   'scale'       => 2,

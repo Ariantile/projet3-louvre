@@ -1,0 +1,10 @@
+{% extends "LouvreBilletterieBundle:Billetterie:index.html.twig" %}
+
+{% block form %}
+{{ parent() }}
+    {{ courriel }}
+    {% for commande in commandes %}
+        {{ commande.numCommande }}
+    {% endfor %}
+    
+{% endblock %}

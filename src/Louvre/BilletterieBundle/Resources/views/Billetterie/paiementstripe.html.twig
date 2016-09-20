@@ -4,10 +4,12 @@
     {{ parent() }}
         <form action="" method="POST" class="intForm">
             <p class="aPayer">
-                    <span>Total à payer : </span>
+                    <span>
+                        {{ 'louvre.stripe.label.total'|trans}} : 
+                    </span>
                     <span class="valeurRecap">
                         {{ commandeEnCours[0].commande.sousTotal }}€
-                    </span> 
+                    </span>
             </p>
            <div class="bstripe">
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -17,6 +19,7 @@
                     data-name="{{ model.name|default("") }}"
                     data-description="{{ model.description }}"
                     data-amount="{{ model.amount }}"
+                    data-allow-remember-me="false"
                     data-locale="auto"
                     data-currency="EUR">
                 </script>

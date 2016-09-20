@@ -1,54 +1,62 @@
-{% extends "LouvreBilletterieBundle:Billetterie:index.html.twig" %}
+{% extends "LouvreBilletterieBundle:Billetterie:paiement.html.twig" %}
 
 {% block form %}
 {{ parent() }}
 <div id="bloc_form_paiement">
     <div id="bloc_form_affichage">
+        {% block remerciement %}
+        {% endblock %}
         <div class="intForm">
-            <h2>Informations de facturation</h2>
+            <h2>{{ 'louvre.accueil.facturation.titre'|trans }}</h2>
             <p>
-                <span>Nom et prenom :</span>
+                <span>{{ 'louvre.paiement.label.nom'|trans }} :</span>
                 <span class="valeurRecap"> 
                     {{ commandeEnCours[0].commande.facturation.nomFacture }}
                     {{ commandeEnCours[0].commande.facturation.prenomFacture }}
                 </span>
             </p>
             <p>
-                <span>Date de naissance :</span>
+                <span>{{ 'louvre.accueil.label.date_nais'|trans }} :</span>
                 <span class="valeurRecap">
                     {{ commandeEnCours[0].commande.facturation.naissanceFacture|date("m/d/Y") }}
                 </span>
             </p>
             <p>
-                <span>Adresse courriel :</span>
+                <span>{{ 'louvre.accueil.facturation.mail'|trans }} :</span>
                 <span class="valeurRecap">
                     {{ commandeEnCours[0].commande.facturation.courriel }}
                 </span> 
             </p>
         </div>
         <div class="intForm">
-            <h2>Recapitulatif de commande</h2>
+            <h2>{{ 'louvre.accueil.validation.titre_r'|trans }}</h2>
             <p>
-                <span>Jour de la visite : </span>
+                <span>{{ 'louvre.accueil.choix.date'|trans }} : </span>
                 <span class="valeurRecap">
                     {{ commandeEnCours[0].commande.dateReservation|date("m/d/Y") }}
                 </span>
             </p>
             <p>
-                <span>Type de billet(s) : </span>
+                <span>{{ 'louvre.paiement.label.type'|trans }} : </span>
                 {% if commandeEnCours[0].commande.demiJournee == true %}
-                    <span class="valeurRecap">Demi-journée</span>
+                    <span class="valeurRecap">
+                        {{ 'louvre.accueil.choix.demi'|trans }}
+                    </span>
                 {% else %}
-                    <span class="valeurRecap">Journée</span>
+                    <span class="valeurRecap">
+                        {{ 'louvre.accueil.choix.jour'|trans }}
+                    </span>
                 {% endif %}     
             </p>
             <p>
-                <span>Nombre de visiteur : </span>
+                <span>{{ 'louvre.paiement.label.nb'|trans }} : </span>
                 <span class="valeurRecap">
                     {{ commandeEnCours[0].commande.qte }}
                 </span>
             </p>
-            <h3>Billets</h3>
+            <h3>
+                {{ 'louvre.accueil.validation.titre_r'|trans }}
+            </h3>
             {% for billet in commandeEnCours %}
             <div class="billetRecap">
                 <p>
@@ -58,11 +66,15 @@
                     </span>
                 </p>
                 <p>
-                    <span>Tarif : {{ billet.tarifBillet }}</span>
+                    <span>
+                        {{ 'louvre.paiement.label.tarif'|trans }} : {{ billet.tarifBillet }}
+                    </span>
                 </p>
                 <p>
-                    <span>Prix hors reduction : </span>
-                    <span>{{ billet.prixBillet }}</span>
+                    <span>
+                        {{ 'louvre.paiement.label.prix'|trans }} : 
+                    </span>
+                    <span>{{ billet.prixBillet }}€</span>
                 </p>
                 
             </div>

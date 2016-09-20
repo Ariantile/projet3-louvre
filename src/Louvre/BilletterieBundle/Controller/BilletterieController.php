@@ -15,11 +15,13 @@ use Louvre\BilletterieBundle\Entity\Tarifs;
 use Louvre\BilletterieBundle\Entity\Facturation;
 use Louvre\BilletterieBundle\Entity\Billet;
 use Louvre\BilletterieBundle\Entity\Commande;
+use Louvre\BilletterieBundle\Entity\Recherche;
 use Louvre\BilletterieBundle\Form\QuantiteType;
 use Louvre\BilletterieBundle\Form\TarifsType;
 use Louvre\BilletterieBundle\Form\FacturationType;
 use Louvre\BilletterieBundle\Form\BilletType;
 use Louvre\BilletterieBundle\Form\CommandeType;
+use Louvre\BilletterieBundle\Form\RechercheType;
 use Payum\Core\Payum;
 use Payum\Core\Security\SensitiveValue;
 use Payum\Core\Security\GenericTokenFactoryInterface;
@@ -44,44 +46,52 @@ class BilletterieController extends Controller
         $form = $this->get('form.factory')->create(CommandeType::class, $commande);
         
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-              
-            $commande->setNumCommande(uniqid());
-            $commande->setDateCommande(new DateTime('now'));
-            
-            $demiJournee = $commande->getDemiJournee();
-            
-            $commande->setStatus('Ongoing');
-            
-            $billets = $commande->getBillets();
-            
-            $total = 0;
-            
-            $i = 1;
-            
-            foreach ($billets as $billet) {
-                $billet->setCodeReservation($commande->getNumCommande() . $i);
-                $billet->setCommande($commande);
-                $prixBillet = $billet->getPrixBillet();
-                $total = $total + $prixBillet;
-                $i++;
-            }
-            
-            if ($demiJournee === true) {
-                $commande->setSousTotal($total/2);   
-            } else {
-                $commande->setSousTotal($total);
-            }
             
             $em = $this->getDoctrine()->getManager();
-            $em->persist($commande);
-            $em->flush();
+            
+            $countBillet = $em->getRepository('LouvreBilletterieBundle:Billet')->countBillet($commande->getDateReservation());
+            
+            if ($countBillet >= 1000) {
+                $session->getFlashBag()->add('erreur', 'louvre.flash.erreur.billet');
+            } else {
                 
-            //$request->getSession()->getFlashBag()->add('idCommande', $commande->getId());
+                $session->set('countB' , $countBillet);
+                
+                $commande->setNumCommande(uniqid());
+                $commande->setDateCommande(new DateTime('now'));
+            
+                $demiJournee = $commande->getDemiJournee();
+            
+                $commande->setStatus('Ongoing');
+            
+                $billets = $commande->getBillets();
+            
+                $total = 0;
+            
+                $i = 1;
+            
+                foreach ($billets as $billet) {
+                    $billet->setCodeReservation($commande->getNumCommande() . $i);
+                    $billet->setCommande($commande);
+                    $prixBillet = $billet->getPrixBillet();
+                    $total = $total + $prixBillet;
+                    $i++;
+                }
+            
+                if ($demiJournee === true) {
+                    $commande->setSousTotal($total/2);   
+                } else {
+                    $commande->setSousTotal($total);
+                }
+            
+                $em->persist($commande);
+                $em->flush();
    
-            $session->set('idCommande'  , $commande->getId());
-            $session->set('demiJournee' , $commande->getDemiJournee());
+                $session->set('idCommande'  , $commande->getId());
+                $session->set('demiJournee' , $commande->getDemiJournee());
                 
-            return $this->redirectToRoute('louvre_billetterie_paiement');
+                return $this->redirectToRoute('louvre_billetterie_paiement');
+            }
         }
         
         return $this->render('LouvreBilletterieBundle:Billetterie:formacc.html.twig', array(
@@ -98,7 +108,7 @@ class BilletterieController extends Controller
             $idCommande = $session->get('idCommande');
             $demiJournee = $session->get('demiJournee');
         } else {
-            $session->getFlashBag()->add('erreur', 'Session expirée ou inexistante.');
+            $session->getFlashBag()->add('erreur', 'louvre.flash.erreur.session');
             return $this->redirectToRoute('louvre_core_homepage');
         }
         
@@ -163,6 +173,13 @@ class BilletterieController extends Controller
     {
         $session = $request->getSession();
         
+        if ($session->has('idCommande')) {
+            $idCommande = $session->get('idCommande');
+        } else {
+            $session->getFlashBag()->add('erreur', 'louvre.flash.erreur.session');
+            return $this->redirectToRoute('louvre_core_homepage');
+        }
+        
         $idCommande = $session->get('idCommande');
         
         $em = $this->getDoctrine()->getManager();
@@ -183,7 +200,7 @@ class BilletterieController extends Controller
         
         if ($status->isCaptured()) {
             
-            //$session->invalidate();
+            $session->invalidate();
             $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);
             $update->setStatus('Valide');
             $update->setNumCommande($update->getNumCommande() . $idCommande);
@@ -193,7 +210,7 @@ class BilletterieController extends Controller
             }
             
             $em->flush();
-            
+                        
             $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
             
             $mail = \Swift_Message::newInstance();
@@ -205,7 +222,6 @@ class BilletterieController extends Controller
                 ->setTo($update->getFacturation($idCommande)->getCourriel())
                 ->setBody(
                     $this->renderView(
-                    // app/Resources/views/Emails/registration.html.twig
                         'LouvreBilletterieBundle:Billetterie:mailbillet.html.twig',
                         array('infos' => $commandeEnCours, 'logo' => $logo)
                     ),
@@ -233,7 +249,75 @@ class BilletterieController extends Controller
             'details' => iterator_to_array($details),
         ));
     }
+    
+    public function recoverAction(Request $request) 
+    {
+        $session = $request->getSession();
+        
+        $recherche = new Recherche();
+        
+        $form = $this->get('form.factory')->create(RechercheType::class, $recherche);
+        
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
+            $em = $this->getDoctrine()->getManager();
+            
+            $courriel = $recherche->getCourriel();
+            
+            $commandes = $em->getRepository('LouvreBilletterieBundle:Commande')->renvoiBillet($courriel);
+            
+            if (!$commandes) {
+                $session->getFlashBag()->add('erreur', 'louvre.recover.erreur');
+            } else {
+            
+                $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
+            
+                foreach ($commandes as $commande) {
+                    
+                    $status = $commande->getStatus();
+                    
+                    if ($status === 'Valide') {
+                    
+                        $idCommande = $commande->getId();
+                
+                        $commandeEnCours = $em
+                            ->getRepository('LouvreBilletterieBundle:Billet')
+                            ->getCommande($idCommande);
+                
+                        $mail = \Swift_Message::newInstance();
+            
+                        $logo = $mail->embed(\Swift_Image::fromPath($image));
+            
+                        $mail->setSubject('Louvre billetterie - Vos billets')
+                            ->setFrom('billetterie@louvre.com')
+                            ->setTo($courriel)
+                            ->setBody(
+                                $this->renderView(
+                                    'LouvreBilletterieBundle:Billetterie:mailbillet.html.twig',
+                                    array('infos' => $commandeEnCours, 'logo' => $logo)
+                                ),
+                                'text/html'
+                            );
+            
+                        $this->get('mailer')->send($mail);
+                    }
+                }
+            
+                $session->getFlashBag()->add('erreur', 'louvre.recover.reussite');
+
+            }
+        }
+        
+        return $this->render('LouvreBilletterieBundle:Billetterie:recover.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+    
+    public function affichageAction(Request $request) 
+    {        
+        return $this->render('LouvreBilletterieBundle:Billetterie:recoveraffichage.html.twig');
+    }
+    
     /**
      * @return Payum
      */

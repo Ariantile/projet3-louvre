@@ -21,7 +21,7 @@ class Commande
      * @Assert\Valid()
      */
     private $facturation;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Louvre\BilletterieBundle\Entity\Billet", mappedBy="commande", cascade={"persist"})
      * @Assert\Valid()
