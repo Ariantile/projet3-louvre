@@ -144,7 +144,7 @@ a:hover
     padding-top: 5px;
     display: inline-block;
     vertical-align: middle;
-    max-height: 25px;
+    max-height: 32px;
 }
 
 .traduction
@@ -243,6 +243,18 @@ a:hover
     color: @noir;
     border: 2px solid @noir;
 }
+
+/*-----------------------------------------------
+---------- Erreurs ------------------------------
+-----------------------------------------------*/
+
+#bloc_error
+{
+    width: 400px; 
+    margin-left: auto;
+    margin-right: auto;  
+}
+
 
 /*-----------------------------------------------
 ---------- Formulaires --------------------------
@@ -401,6 +413,10 @@ button:disabled
     display: none;
 }
 
+/*-----------------------------------------------
+---------- Panier -------------------------------
+-----------------------------------------------*/
+
 #panier
 {
     display: none;
@@ -460,6 +476,9 @@ input[readonly] {
     .blocUnBillet
 }
 
+/*-----------------------------------------------
+---------- Validation/Paiement ------------------
+-----------------------------------------------*/
 
 #bloc_form_paiement
 {
@@ -630,42 +649,6 @@ footer
     
     }
     
-}
-
-@media (max-width: 630px) {
-    #panier
-    {
-        position: fixed;
-        top: 30px;
-        width: 320px;
-        left:0;
-        right:0;
-        margin-left:auto;
-        margin-right:auto;
-    }
-}
-
-@media (max-width: 480px) {
-    
-    #headAccueil
-    {
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        min-height: 400px;
-    }
-    
-    #bloc_form
-    {
-        width: 340px;
-    }
-    
-    #panier
-    {
-        width: 340px;
-    }
-    
     .logoTitre
     {
         margin-bottom: 10px;
@@ -701,8 +684,40 @@ footer
         padding-left: 5px;
     }
     
+}
+
+@media (max-width: 630px) {
     #panier
     {
+        position: fixed;
+        top: 30px;
+        width: 320px;
+        left:0;
+        right:0;
+        margin-left:auto;
+        margin-right:auto;
+    }
+}
+
+@media (max-width: 480px) {
+    
+    #headAccueil
+    {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        min-height: 400px;
+    }
+    
+    #bloc_form
+    {
+        width: 340px;
+    }
+    
+    #panier
+    {
+        width: 340px;
         top: 70px;
     }
     

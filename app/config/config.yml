@@ -22,7 +22,7 @@ framework:
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-    default_locale:  %locale%
+    default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -50,12 +50,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -83,3 +77,17 @@ payum:
             factory: stripe_checkout
             publishable_key: pk_test_SWKJLqWs1X8sbc9u2IK2MNOs
             secret_key: sk_test_nm7TBSl1DNWaXjQdfkzPtM3s
+            
+assetic:
+  debug:          '%kernel.debug%'
+  use_controller: '%kernel.debug%'
+  filters:
+    cssrewrite: ~
+    jsqueeze:   ~
+    scssphp:
+      formatter: 'Leafo\ScssPhp\Formatter\Compressed'
+      
+ewz_recaptcha:
+    public_key:  6LeB-yETAAAAAFor6mXF-8gCg60J86BgrJKSNNzJ
+    private_key: 6LeB-yETAAAAANL04lOeii57Fxt3dqgpC0lM-4z8
+    locale_key:  "%kernel.default_locale%"

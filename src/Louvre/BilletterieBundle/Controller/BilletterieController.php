@@ -232,11 +232,14 @@ class BilletterieController extends Controller
             
         } else if ($status->isPending() || $status->isFailed()) {
             
-            $session->invalidate();
+            $session->getFlashBag()->add('erreur', 'louvre.done.erreur');
+            
             $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);
             $update->setStatus('Failed');
             
             $em->flush();
+            
+            return $this->redirectToRoute('louvre_billetterie_paiement');
             
         }
         
@@ -311,11 +314,6 @@ class BilletterieController extends Controller
         return $this->render('LouvreBilletterieBundle:Billetterie:recover.html.twig', array(
             'form' => $form->createView()
         ));
-    }
-    
-    public function affichageAction(Request $request) 
-    {        
-        return $this->render('LouvreBilletterieBundle:Billetterie:recoveraffichage.html.twig');
     }
     
     /**

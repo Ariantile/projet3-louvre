@@ -57,6 +57,8 @@ louvre.paiement.label.prix:         Price without reduction
 
 louvre.paiement.lien.retour:        Home
 
+louvre.done.erreur:                 An error occurred while processing your payment. Your account was not charged, please check your payment information and try again.
+
 louvre.stripe.label.total:          Amount to be paid
 
 louvre.remerciement.titre:          Thank you for your order

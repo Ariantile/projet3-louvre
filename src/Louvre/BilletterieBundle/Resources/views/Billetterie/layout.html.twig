@@ -15,7 +15,10 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{{ asset('bundles/louvrebilletterie/css/style.css') }}"/>
+            
+            {% stylesheets filter='cssrewrite, ?scssphp''bundles/louvrebilletterie/css/style.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+            {% endstylesheets %}
         {% endblock %}
     </head>
 
@@ -26,7 +29,10 @@
             <div class="row">
                 <div class="col-sm-5 col-xs-12 logoTitre">
                     <p>
-                        {{ 'louvre.layout.titre'|trans }} - 
+                        
+                        <a href="{{ url('louvre_core_homepage') }}" class="lienretour">
+                            {{ 'louvre.layout.titre'|trans }}
+                        </a>  - 
                         <span id="locale">{{ app.request.getLocale()|upper }}</span>
                     </p>
                 </div>
@@ -93,7 +99,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="{{ asset('bundles/louvrebilletterie/javascript/script.js') }}"/></script>
+        {% javascripts filter='?jsqueeze''bundles/louvrebilletterie/javascript/script.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     {% endblock %}
 
   </body>

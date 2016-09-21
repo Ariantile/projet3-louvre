@@ -1,0 +1,23 @@
+{% extends "LouvreBilletterieBundle:Billetterie:layout.html.twig" %}
+
+{% block header %}
+    <a href="{{ url('louvre_core_homepage') }}" class="lienretour">
+        {{ 'louvre.paiement.lien.retour'|trans }}
+    </a>
+{% endblock %}
+
+{% block content %}
+    <div id="headAccueil" class="container">
+        <div id="ancreFormAcc" class="row">
+           <div id="bloc_error" class="intForm">
+            <h1>Oops! An Error Occurred</h1>
+            <h2>The server returned a "{{ status_code }} {{ status_text }}".</h2>
+
+            <div>
+                Something is broken.We will fix it as soon
+                as possible. Sorry for any inconvenience caused.
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

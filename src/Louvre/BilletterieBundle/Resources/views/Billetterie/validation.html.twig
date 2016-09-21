@@ -3,6 +3,11 @@
 {% block form %}
 {{ parent() }}
 <div id="bloc_form_paiement">
+    {% for message in app.session.flashbag.get('erreur') %}
+        <div class="flash-message">
+            {{ message|trans }}
+        </div>
+    {% endfor %}
     <div id="bloc_form_affichage">
         {% block remerciement %}
         {% endblock %}

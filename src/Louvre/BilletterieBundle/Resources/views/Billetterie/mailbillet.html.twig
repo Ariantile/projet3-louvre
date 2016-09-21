@@ -141,7 +141,6 @@
             <td style="border-left: 1px solid grey;
                        border-right: 1px solid grey;
                        border-bottom: 1px solid grey;">
-                <img src="{{ qrcode_data_uri(infos[0].commande.numCommande, { extension: 'png', size: 100 }) }}" />
                 {{ 'louvre.mail.reserv_code'|trans }} : {{ infos[0].commande.numCommande }}
             </td>
         </tr>    

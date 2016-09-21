@@ -57,6 +57,8 @@ louvre.paiement.label.prix:         Prix hors réduction
 
 louvre.paiement.lien.retour:        Accueil
 
+louvre.done.erreur:                 Une erreur est survenue au moment du paiement. Votre carte n'a pas été débité, veuillez vérifier vos informations de paiement et réessayer 
+
 louvre.stripe.label.total:          Total à payer
 
 louvre.remerciement.titre:          Merci de votre commande

@@ -10,7 +10,7 @@ root:
     path: /
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
-        path: /en/
+        path: /fr/
         permanent: true
 
 payum_capture:
