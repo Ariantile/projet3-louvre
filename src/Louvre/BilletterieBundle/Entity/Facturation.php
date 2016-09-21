@@ -27,7 +27,7 @@ class Facturation
      * @var string
      *
      * @ORM\Column(name="nom_facture", type="string", length=255)
-     * @Assert\length(
+     * @Assert\Length(
      *      min = 2,
      *      max = 30
      * )
@@ -38,7 +38,7 @@ class Facturation
      * @var string
      *
      * @ORM\Column(name="prenom_facture", type="string", length=255)
-     * @Assert\length(
+     * @Assert\Length(
      *      min = 2,
      *      max = 30
      * )

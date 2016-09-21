@@ -198,6 +198,11 @@ class BilletterieController extends Controller
         $gateway->execute($status = new GetHumanStatus($token));
         $details = $status->getFirstModel();
         
+        return new JsonResponse(array(
+            'status' => $status->getValue(),
+            'details' => iterator_to_array($details),
+        ));
+        
         if ($status->isCaptured()) {
             
             $session->invalidate();
@@ -245,11 +250,6 @@ class BilletterieController extends Controller
         
         return $this->render('LouvreBilletterieBundle:Billetterie:remerciement.html.twig', array(
             'commandeEnCours' => $commandeEnCours
-        ));
-        
-        return new JsonResponse(array(
-            'status' => $status->getValue(),
-            'details' => iterator_to_array($details),
         ));
     }
     
