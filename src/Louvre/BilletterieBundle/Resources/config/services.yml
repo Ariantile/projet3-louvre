@@ -1,1 +1,19 @@
 # src/Louvre/BilletterieBundle/Resources/config/services.yml
+
+services:
+    louvre_send.mail:
+        class: Louvre\BilletterieBundle\SendMail\LouvreSendMail
+        arguments:
+            - "@mailer"
+            - "@twig"
+            
+    louvre_commande.create:
+        class: Louvre\BilletterieBundle\CreationCommande\LouvreCreationCommande
+        arguments:
+            - "@doctrine"
+            
+    louvre_paiement.prepare:
+        class: Louvre\BilletterieBundle\PreparationPaiement\LouvrePreparationPaiement
+        arguments:
+            - "@doctrine"
+            - "@payum"

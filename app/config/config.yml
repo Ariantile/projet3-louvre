@@ -75,8 +75,8 @@ payum:
     gateways:
         louvre_stripe_checkout:
             factory: stripe_checkout
-            publishable_key: pk_test_SWKJLqWs1X8sbc9u2IK2MNOs
-            secret_key: sk_test_nm7TBSl1DNWaXjQdfkzPtM3s
+            publishable_key: "%publishable_key%"
+            secret_key: "%secret_key%"
             
 assetic:
   debug:          '%kernel.debug%'
@@ -88,6 +88,6 @@ assetic:
       formatter: 'Leafo\ScssPhp\Formatter\Compressed'
       
 ewz_recaptcha:
-    public_key:  6LeB-yETAAAAAFor6mXF-8gCg60J86BgrJKSNNzJ
-    private_key: 6LeB-yETAAAAANL04lOeii57Fxt3dqgpC0lM-4z8
+    public_key:  "%public_key%"
+    private_key: "%private_key%"
     locale_key:  "%kernel.default_locale%"
