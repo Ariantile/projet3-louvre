@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Louvre\BilletterieBundle\Form\FacturationType;
 use Louvre\BilletterieBundle\Form\BilletType;
 

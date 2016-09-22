@@ -6,6 +6,7 @@ services:
         arguments:
             - "@mailer"
             - "@twig"
+            - "@doctrine"
             
     louvre_commande.create:
         class: Louvre\BilletterieBundle\CreationCommande\LouvreCreationCommande
@@ -17,3 +18,4 @@ services:
         arguments:
             - "@doctrine"
             - "@payum"
+            - "@louvre_send.mail"

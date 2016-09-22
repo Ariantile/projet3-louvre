@@ -8,17 +8,18 @@ class LouvreSendMail
     private $mailer;
     private $twig;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $doctrine)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
+        $this->doctrine = $doctrine;
     }
 
     /**
      * Génération et envoi de mail
      *
      */
-    public function sendMail($image, $idCommande, $commandeEnCours, $courriel)
+    public function sendMail($image, $commandeEnCours, $courriel)
     {
         $mail = \Swift_Message::newInstance();
             
@@ -36,5 +37,26 @@ class LouvreSendMail
                 );
             
             $this->mailer->send($mail);
+    }
+    
+    public function renvoiMail($commandes, $courriel, $image)
+    {
+        $em = $this->doctrine->getManager();
+        
+        foreach ($commandes as $commande) {
+
+            $status = $commande->getStatus();
+            
+            if ($status === 'Valide') {
+                    
+                $idCommande = $commande->getId();
+                    
+                $commandeEnCours = $em
+                    ->getRepository('LouvreBilletterieBundle:Billet')
+                    ->getCommande($idCommande);
+                    
+                sendMail($image, $commandeEnCours, $courriel);
+            }
+        }   
     }
 }

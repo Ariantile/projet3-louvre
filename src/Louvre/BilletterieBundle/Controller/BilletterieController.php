@@ -5,32 +5,11 @@ namespace Louvre\BilletterieBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration as Extra;
-use Louvre\BilletterieBundle\Entity\Payment;
-use Louvre\BilletterieBundle\Entity\Tarifs;
-use Louvre\BilletterieBundle\Entity\Facturation;
-use Louvre\BilletterieBundle\Entity\Billet;
 use Louvre\BilletterieBundle\Entity\Commande;
 use Louvre\BilletterieBundle\Entity\Recherche;
-use Louvre\BilletterieBundle\Form\QuantiteType;
-use Louvre\BilletterieBundle\Form\TarifsType;
-use Louvre\BilletterieBundle\Form\FacturationType;
-use Louvre\BilletterieBundle\Form\BilletType;
 use Louvre\BilletterieBundle\Form\CommandeType;
 use Louvre\BilletterieBundle\Form\RechercheType;
-use Payum\Core\Payum;
-use Payum\Core\Security\SensitiveValue;
-use Payum\Core\Security\GenericTokenFactoryInterface;
-use Payum\Core\Bridge\Symfony\Form\Type\CreditCardType;
-use Payum\Core\Model\CreditCardInterface;
-use Payum\Core\Registry\RegistryInterface;
-use Payum\Core\Request\GetHumanStatus;
-use Payum\Stripe\Request\Api\CreatePlan;
-use Louvre\BilletterieBundle\Entity\PaymentDetails;
 use \DateTime;
 
 class BilletterieController extends Controller
@@ -74,7 +53,7 @@ class BilletterieController extends Controller
         $gatewayName = 'louvre_stripe_checkout';
         $prepPaiement = $this->container->get('louvre_paiement.prepare');
         $commandeEnCours = $prepPaiement->getCommandeEnCours($idCommande);
-        $payment = $prepPaiement->preparePayment($idCommande, $demiJournee, $commandeEnCours);
+        $payment = $prepPaiement->preparePayment($demiJournee, $commandeEnCours);
         if ($request->isMethod('POST') && $request->request->get('stripeToken')) {
             $payment["card"] = $request->request->get('stripeToken');
             $captureToken = $prepPaiement->postPayment($gatewayName, $payment, 'louvre_payment_done', $idCommande);
@@ -103,23 +82,15 @@ class BilletterieController extends Controller
         if ($status->isCaptured()) {
             $session->invalidate();
             $commandeEnCours = $paiementValidation->getCommandeEnCours($idCommande);
-            $paiementValidation->paiementValide($idCommande, $commandeEnCours);
-            $em = $this->getDoctrine()->getManager();
-            $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);
             $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
-            $courriel = $update->getFacturation()->getCourriel();
-            $envoiMail = $this->container->get('louvre_send.mail');
-            $envoiMail->sendMail($image, $idCommande, $commandeEnCours, $courriel);
-            
+            $paiementValidation->paiementValide($idCommande, $commandeEnCours, $image);
         } else if ($status->isPending() || $status->isFailed()) {
             $paiementValidation->paiementFailed($idCommande);
             $session->getFlashBag()->add('erreur', 'louvre.done.erreur');
             return $this->redirectToRoute('louvre_billetterie_paiement');
         }
-        
         return $this->render('LouvreBilletterieBundle:Billetterie:remerciement.html.twig', array(
-            'commandeEnCours' => $commandeEnCours
-        ));
+            'commandeEnCours' => $commandeEnCours));
     }
     
     public function recoverAction(Request $request) 
@@ -135,22 +106,12 @@ class BilletterieController extends Controller
                 $session->getFlashBag()->add('erreur', 'louvre.recover.erreur');
             } else {
                 $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
-                foreach ($commandes as $commande) {
-                    $status = $commande->getStatus();   
-                    if ($status === 'Valide') {
-                        $idCommande = $commande->getId();
-                        $commandeEnCours = $em
-                            ->getRepository('LouvreBilletterieBundle:Billet')
-                            ->getCommande($idCommande);
-                        $envoiMail = $this->container->get('louvre_send.mail');
-                        $envoiMail->sendMail($image, $idCommande, $commandeEnCours, $courriel);
-                    }
-                }
+                $envoiMail = $this->container->get('louvre_send.mail');
+                $envoiMail->renvoiMail($commandes, $courriel, $image);
                 $session->getFlashBag()->add('erreur', 'louvre.recover.reussite');
             }
         }
         return $this->render('LouvreBilletterieBundle:Billetterie:recover.html.twig', array(
-            'form' => $form->createView()
-        ));
+            'form' => $form->createView() ));
     }
 }

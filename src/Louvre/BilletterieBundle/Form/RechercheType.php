@@ -4,7 +4,6 @@ namespace Louvre\BilletterieBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;

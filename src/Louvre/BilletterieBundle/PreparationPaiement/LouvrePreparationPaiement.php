@@ -10,10 +10,11 @@ class LouvrePreparationPaiement
 
     protected $doctrine;
     
-    public function __construct($doctrine, $payum)
+    public function __construct($doctrine, $payum, $sendmail)
     {      
         $this->doctrine = $doctrine;
         $this->payum = $payum;
+        $this->sendmail = $sendmail;
     }
     
     public function getCommandeEnCours($idCommande)
@@ -31,7 +32,7 @@ class LouvrePreparationPaiement
      * Prépation de la page de paiement
      *
      */
-    public function preparePayment($idCommande, $demiJournee, $commandeEnCours)
+    public function preparePayment($demiJournee, $commandeEnCours)
     {
         $total = 0;
         
@@ -82,19 +83,19 @@ class LouvrePreparationPaiement
     public function retourToken($token)
     {
         $identity = $token->getDetails();
-        $model = $this->payum->getStorage($identity->getClass())->find($identity);
         $gateway = $this->payum->getGateway($token->getGatewayName());
         $gateway->execute($status = new GetHumanStatus($token));
-        $details = $status->getFirstModel();
         
         return $status;
     }
     
-    public function paiementValide($idCommande, $commandeEnCours)
+    public function paiementValide($idCommande, $commandeEnCours, $image)
     {
-        $em = $this->doctrine->getManager();
-        
-        $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);
+            $em = $this->doctrine->getManager();
+            $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);  
+            $courriel = $update->getFacturation()->getCourriel();
+            $envoiMail = $this->sendmail;
+            $envoiMail->sendMail($image, $commandeEnCours, $courriel);
             $update->setStatus('Valide');
             $update->setNumCommande($update->getNumCommande() . $idCommande);
             
