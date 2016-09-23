@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Louvre\BilletterieBundle\Entity\Commande;
 use Louvre\BilletterieBundle\Entity\Recherche;
-use Louvre\BilletterieBundle\Form\CommandeType;
-use Louvre\BilletterieBundle\Form\RechercheType;
+use Louvre\BilletterieBundle\Form\Type\CommandeType;
+use Louvre\BilletterieBundle\Form\Type\RechercheType;
 use \DateTime;
 
 class BilletterieController extends Controller
@@ -91,7 +91,7 @@ class BilletterieController extends Controller
         return $this->render('LouvreBilletterieBundle:Billetterie:remerciement.html.twig', array(
             'commandeEnCours' => $commandeEnCours));
     }
-    
+
     public function recoverAction(Request $request) 
     {
         $session = $request->getSession();

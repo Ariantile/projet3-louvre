@@ -1,6 +1,6 @@
 <?php
 
-namespace Louvre\BilletterieBundle\Form;
+namespace Louvre\BilletterieBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -9,8 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Louvre\BilletterieBundle\Form\FacturationType;
-use Louvre\BilletterieBundle\Form\BilletType;
+use Louvre\BilletterieBundle\Form\Type\FacturationType;
+use Louvre\BilletterieBundle\Form\Type\BilletType;
 
 class CommandeType extends AbstractType
 {

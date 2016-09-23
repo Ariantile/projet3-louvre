@@ -1,6 +1,6 @@
 <?php
 
-namespace Louvre\BilletterieBundle\Form;
+namespace Louvre\BilletterieBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

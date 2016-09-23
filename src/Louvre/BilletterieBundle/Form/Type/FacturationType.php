@@ -1,6 +1,6 @@
 <?php
 
-namespace Louvre\BilletterieBundle\Form;
+namespace Louvre\BilletterieBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-
 
 class FacturationType extends AbstractType
 {

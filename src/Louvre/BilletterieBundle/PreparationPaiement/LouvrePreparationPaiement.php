@@ -82,7 +82,6 @@ class LouvrePreparationPaiement
     
     public function retourToken($token)
     {
-        $identity = $token->getDetails();
         $gateway = $this->payum->getGateway($token->getGatewayName());
         $gateway->execute($status = new GetHumanStatus($token));
         

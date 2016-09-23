@@ -2,6 +2,7 @@
     "name": "ariantile/louvre",
     "license": "proprietary",
     "type": "project",
+    "description": "Projet 3 Louvre",
     "autoload": {
         "psr-4": { "": "src/" },
         "classmap": [
