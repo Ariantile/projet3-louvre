@@ -7,20 +7,25 @@ class LouvreSendMail
 {
     private $mailer;
     private $twig;
+    private $doctrine;
+    private $container;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $doctrine)
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, $doctrine, $container)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
         $this->doctrine = $doctrine;
+        $this->container = $container;
     }
 
     /**
      * Génération et envoi de mail
      *
      */
-    public function sendMail($image, $commandeEnCours, $courriel)
+    public function sendMail($commandeEnCours, $courriel)
     {
+        $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
+        
         $mail = \Swift_Message::newInstance();
             
         $logo = $mail->embed(\Swift_Image::fromPath($image));
@@ -39,7 +44,7 @@ class LouvreSendMail
             $this->mailer->send($mail);
     }
     
-    public function renvoiMail($commandes, $courriel, $image)
+    public function renvoiMail($commandes, $courriel)
     {
         $em = $this->doctrine->getManager();
         
@@ -55,7 +60,7 @@ class LouvreSendMail
                     ->getRepository('LouvreBilletterieBundle:Billet')
                     ->getCommande($idCommande);
                     
-                sendMail($image, $commandeEnCours, $courriel);
+                sendMail($commandeEnCours, $courriel);
             }
         }   
     }

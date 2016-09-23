@@ -89,13 +89,13 @@ class LouvrePreparationPaiement
         return $status;
     }
     
-    public function paiementValide($idCommande, $commandeEnCours, $image)
+    public function paiementValide($idCommande, $commandeEnCours)
     {
             $em = $this->doctrine->getManager();
             $update = $em->getRepository('LouvreBilletterieBundle:Commande')->find($idCommande);  
             $courriel = $update->getFacturation()->getCourriel();
             $envoiMail = $this->sendmail;
-            $envoiMail->sendMail($image, $commandeEnCours, $courriel);
+            $envoiMail->sendMail($commandeEnCours, $courriel);
             $update->setStatus('Valide');
             $update->setNumCommande($update->getNumCommande() . $idCommande);
             

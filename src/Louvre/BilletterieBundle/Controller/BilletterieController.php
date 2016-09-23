@@ -82,8 +82,7 @@ class BilletterieController extends Controller
         if ($status->isCaptured()) {
             $session->invalidate();
             $commandeEnCours = $paiementValidation->getCommandeEnCours($idCommande);
-            $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
-            $paiementValidation->paiementValide($idCommande, $commandeEnCours, $image);
+            $paiementValidation->paiementValide($idCommande, $commandeEnCours);
         } else if ($status->isPending() || $status->isFailed()) {
             $paiementValidation->paiementFailed($idCommande);
             $session->getFlashBag()->add('erreur', 'louvre.done.erreur');
@@ -105,9 +104,8 @@ class BilletterieController extends Controller
             if (!$commandes) {
                 $session->getFlashBag()->add('erreur', 'louvre.recover.erreur');
             } else {
-                $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
                 $envoiMail = $this->container->get('louvre_send.mail');
-                $envoiMail->renvoiMail($commandes, $courriel, $image);
+                $envoiMail->renvoiMail($commandes, $courriel);
                 $session->getFlashBag()->add('erreur', 'louvre.recover.reussite');
             }
         }
