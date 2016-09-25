@@ -1158,7 +1158,7 @@ $(function () {
         var emailfield = $(this).get(0);
         emailfield.setCustomValidity('');
         
-        if (!emailfield.validity.typeMismatch || !emailfield.validity.valid) {
+        if (!emailfield.validity.valid) {
             if ($locale === 'FR') {
                 emailfield.setCustomValidity('Format inexact : adresse@mail.com');    
             } else if ($locale === 'EN') {
@@ -1171,7 +1171,7 @@ $(function () {
         var emailfield = $(this).get(0);
         emailfield.setCustomValidity('');
         
-        if (!emailfield.validity.typeMismatch || !emailfield.validity.valid) {
+        if (!emailfield.validity.valid) {
             if ($locale === 'FR') {
                 emailfield.setCustomValidity('Format inexact : adresse@mail.com');    
             } else if ($locale === 'EN') {

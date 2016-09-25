@@ -121,7 +121,6 @@ class BilletterieController extends Controller
         $contact = new Contact();
         $form = $this->get('form.factory')->create(ContactType::class, $contact);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $courriel = $contact->getEmail();
             $titre = $contact->getTitre();
             $message = $contact->getMessage();
