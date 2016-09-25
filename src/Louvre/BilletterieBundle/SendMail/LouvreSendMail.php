@@ -41,7 +41,29 @@ class LouvreSendMail
                     'text/html'
                 );
             
-            $this->mailer->send($mail);
+        $this->mailer->send($mail);
+    }
+    
+    public function sendContact($courriel, $titre, $message, $nom)
+    {
+        $image = $this->container->get('kernel')->getRootDir().'/../web/bundles/louvrebilletterie/images/logo.png';
+        
+        $mail = \Swift_Message::newInstance();
+            
+        $logo = $mail->embed(\Swift_Image::fromPath($image));
+            
+        $mail->setSubject('Louvre billetterie - Message de ' . $nom)
+             ->setFrom($courriel)
+             ->setTo($this->container->getParameter('mail_contact'))
+             ->setBody(
+                    $this->twig->render(
+                        'LouvreBilletterieBundle:Billetterie:mailcontact.html.twig',
+                        array('titre' => $titre, 'message' => $message, 'logo' => $logo)
+                    ),
+                    'text/html'
+                );
+            
+        $this->mailer->send($mail);
     }
     
     public function renvoiMail($commandes, $courriel)
@@ -60,7 +82,7 @@ class LouvreSendMail
                     ->getRepository('LouvreBilletterieBundle:Billet')
                     ->getCommande($idCommande);
                     
-                sendMail($commandeEnCours, $courriel);
+                $this->sendMail($commandeEnCours, $courriel);
             }
         }   
     }

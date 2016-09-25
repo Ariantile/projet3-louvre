@@ -84,3 +84,11 @@ louvre.mail.titre:                  Louvre ticketing
 louvre.mail.message:                Louvre museum thanks you for your order. You will find bellow your order summary and the necessary information to enter in the museum.
 louvre.mail.billets:                Ticket(s)
 louvre.mail.reserv_code:            Booking code
+
+louvre.contact.label.titre:         Subject of your message
+louvre.contact.label.message:       Your message
+louvre.contact.submit:              Submit
+louvre.contact.titre:               Contact us
+louvre.contact.message:             If you wish to contact us regarding an order or a problem with the web site, please fill in the form bellow, we will contact you as soon as possible.
+louvre.contact.reussite:            Your message has been sent
+louvre.contact.echec:               A problem occured will sending your message, please try again

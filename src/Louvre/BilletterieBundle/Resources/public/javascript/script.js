@@ -1123,4 +1123,60 @@ $(function () {
             $('#commande_qte').val(index);
         }
     });
+    
+    /**********************************************************************************************
+    *********************** FORMULAIRE VALIDATION BOOTSTRAP ***************************************
+    **********************************************************************************************/
+    
+    $('form[name="contact"] input[type=text]').on('change invalid', function() {
+        var textfield = $(this).get(0);
+        textfield.setCustomValidity('');
+    
+        if (!textfield.validity.valid) {
+            if ($locale === 'FR') {
+                textfield.setCustomValidity('Veuillez remplir ce champ');    
+            } else if ($locale === 'EN') {
+                textfield.setCustomValidity('Please fill in the field'); 
+            } 
+        }
+    });
+    
+    $('form[name="contact"] textarea').on('change invalid', function() {
+        var textfield = $(this).get(0);
+        textfield.setCustomValidity('');
+    
+        if (!textfield.validity.valid) {
+            if ($locale === 'FR') {
+                textfield.setCustomValidity('Veuillez remplir ce champ');    
+            } else if ($locale === 'EN') {
+                textfield.setCustomValidity('Please fill in the field'); 
+            } 
+        }
+    });
+    
+     $('form[name="contact"] input[type=email]').on('change invalid', function() {
+        var emailfield = $(this).get(0);
+        emailfield.setCustomValidity('');
+        
+        if (!emailfield.validity.typeMismatch || !emailfield.validity.valid) {
+            if ($locale === 'FR') {
+                emailfield.setCustomValidity('Format inexact : adresse@mail.com');    
+            } else if ($locale === 'EN') {
+                emailfield.setCustomValidity('Incorrect format : adresse@mail.com'); 
+            } 
+        }
+    });
+    
+    $('form[name="recherche"] input[type=email]').on('change invalid', function() {
+        var emailfield = $(this).get(0);
+        emailfield.setCustomValidity('');
+        
+        if (!emailfield.validity.typeMismatch || !emailfield.validity.valid) {
+            if ($locale === 'FR') {
+                emailfield.setCustomValidity('Format inexact : adresse@mail.com');    
+            } else if ($locale === 'EN') {
+                emailfield.setCustomValidity('Incorrect format : adresse@mail.com'); 
+            } 
+        }
+    });
 });

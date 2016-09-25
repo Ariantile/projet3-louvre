@@ -44,7 +44,6 @@ class FacturationType extends AbstractType
                   'maxlength'   => '10'),))
             ->add('courriel', RepeatedType::class, array(
                   'type'            => EmailType::class,
-                  'invalid_message' => 'louvre.accueil.courriel.error',
                   'required'        => true,
                   'first_options'   => array('label' => 'louvre.accueil.facturation.mail'),
                   'second_options'  => array('label' => 'louvre.accueil.facturation.mail_cf'),

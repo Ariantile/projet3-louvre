@@ -19,8 +19,8 @@ louvre_billet_recover:
     path:   /recover
     defaults:
         _controller: LouvreBilletterieBundle:Billetterie:recover
-        
-louvre_billet_recover_affichage:
-    path:   /commande
+
+louvre_billetterie_contact:
+    path:   /contact
     defaults:
-        _controller: LouvreBilletterieBundle:Billetterie:affichage
+        _controller: LouvreBilletterieBundle:Billetterie:contact

@@ -2,9 +2,7 @@
 
 {% block form %}
 {{ parent() }}
-
 <div id="bloc_form">
-  
    {% for message in app.session.flashbag.get('erreur') %}
         <div class="flash-message">
             {{ message|trans }}
@@ -13,8 +11,8 @@
     
     <div id="bloc_form_affichage">
         <div class="intForm msgrecover">
-            <h2>{{ 'louvre.recover.titre'|trans }}</h2>
-            <p>{{ 'louvre.recover.message'|trans }}</p>
+            <h2>{{ 'louvre.contact.titre'|trans }}</h2>
+            <p>{{ 'louvre.contact.message'|trans }}</p>
         </div>
         <div class="intForm">
                 {{ form(form) }}

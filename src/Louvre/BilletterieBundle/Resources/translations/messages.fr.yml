@@ -86,3 +86,13 @@ louvre.mail.billets:                Billet(s)
 louvre.mail.reserv_code:            Code de reservation
 
 louvre.form.validation.length:      Doit comporter entre 2 et 30 caractères alphabétiques.
+
+louvre.contact.label.titre:         Sujet de votre message
+louvre.contact.label.message:       Votre message
+louvre.contact.submit:              Envoyer
+louvre.contact.titre:               Contactez-nous
+louvre.contact.message:             Si vous souhaitez nous contacter à propos d'une commande ou d'un problème avec la billetterie, veuillez remplir le formulaire ci-dessous, nous vous recontacterons au plus vite.
+louvre.contact.reussite:            Votre message à bien été envoyé
+louvre.contact.echec:               Il y a eu un problème lors de l'envoi du formulaire, veuillez réesseyer
+
+contact.champ.vide:                 test

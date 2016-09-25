@@ -8,8 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Louvre\BilletterieBundle\Entity\Commande;
 use Louvre\BilletterieBundle\Entity\Recherche;
+use Louvre\BilletterieBundle\Entity\Contact;
 use Louvre\BilletterieBundle\Form\Type\CommandeType;
 use Louvre\BilletterieBundle\Form\Type\RechercheType;
+use Louvre\BilletterieBundle\Form\Type\ContactType;
 use \DateTime;
 
 class BilletterieController extends Controller
@@ -110,6 +112,25 @@ class BilletterieController extends Controller
             }
         }
         return $this->render('LouvreBilletterieBundle:Billetterie:recover.html.twig', array(
+            'form' => $form->createView() ));
+    }
+    
+    public function contactAction(Request $request)
+    {
+        $session = $request->getSession();
+        $contact = new Contact();
+        $form = $this->get('form.factory')->create(ContactType::class, $contact);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $courriel = $contact->getEmail();
+            $titre = $contact->getTitre();
+            $message = $contact->getMessage();
+            $nom = $contact->getNom();
+            $envoiContact = $this->container->get('louvre_send.mail');
+            $envoiContact->sendContact($courriel, $titre, $message, $nom);
+            $session->getFlashBag()->add('erreur', 'louvre.contact.reussite');
+        }
+        return $this->render('LouvreBilletterieBundle:Billetterie:contact.html.twig', array(
             'form' => $form->createView() ));
     }
 }
