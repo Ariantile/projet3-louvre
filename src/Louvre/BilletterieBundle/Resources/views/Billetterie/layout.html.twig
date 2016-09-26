@@ -59,6 +59,16 @@
                             {{ 'louvre.layout.lost_lien'|trans }}
                         </a>.
                     </p>
+                    <p>
+                        <a href="{{ url('louvre_billetterie_contact') }}">
+                            {{ 'louvre.contact.titre'|trans }}
+                        </a>
+                    </p>
+                    <p>
+                        <a href="{{ url('louvre_billetterie_infos') }}">
+                            {{ 'louvre.infos.link'|trans }}
+                        </a>
+                    </p>
                 </div>
                 <div class="col-sm-6 col-xs-12 paiement">
                     <h2>
@@ -85,12 +95,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6">
-                    <a href="{{ url('louvre_billetterie_contact') }}">
-                        {{ 'louvre.contact.titre'|trans }}
-                    </a>
-                </div>
-                <div class="col-xs-6">
+                <div class="col-xs-12">
                     <p class="copy">
                         {{ 'louvre.layout.copyright'|trans }} © 
                         {{ 'now'|date('Y') }}.
@@ -104,6 +109,8 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTFV5yqH-av147gz_s2Onfl5UtxCu2Og8&callback=initMap"
+        async defer></script>
         {% javascripts filter='?jsqueeze''bundles/louvrebilletterie/javascript/script.js' %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}

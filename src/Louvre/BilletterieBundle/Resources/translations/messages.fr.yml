@@ -95,4 +95,39 @@ louvre.contact.message:             Si vous souhaitez nous contacter à propos d
 louvre.contact.reussite:            Votre message à bien été envoyé
 louvre.contact.echec:               Il y a eu un problème lors de l'envoi du formulaire, veuillez réesseyer
 
-contact.champ.vide:                 test
+louvre.infos.link:                  Infos pratiques
+louvre.info.tab.label1:             Carte
+louvre.info.tab.label2:             Informations
+louvre.info.tab.label3:             Transports
+louvre.info.map.titre:              Emplacement du musée du Louvre
+
+louvre.info.tab2.titre1:            Adresse
+louvre.info.tab2.message1:          Musée du Louvre, 75058 Paris - France
+louvre.info.tab2.titre2:            Horaires
+louvre.info.tab2.message2:          Ouvert tous les jours de 9h à 18h sauf le mardi. Nocturnes jusqu’à 21h45 le mercredi et le vendredi.
+louvre.info.tab2.titre3:            Moyens de paiement
+louvre.info.tab2.message3.1:        Seuls les paiements en euros sont acceptés.
+louvre.info.tab2.message3.2:        Vous pouvez effectuer votre règlement en espèce, carte bancaire, chèque bancaire ou chèque vacances (ANCV) aux caisses du musée.
+louvre.info.tab2.message3.3:        A nos distributeurs automatiques, seules les cartes bancaires sont admises.
+louvre.info.tab2.titre4:            Accès libre   
+louvre.info.tab2.message4:          Les adhérents du musée du Louvre bénéficient d’un accès prioritaire et illimité aux collections permanentes et, selon la carte, aux expositions du hall Napoléon.
+
+louvre.info.tab3.titre1:            En métro
+louvre.info.tab3.message1:          Lignes 1 station Palais-Royal/musée du Louvre
+louvre.info.tab3.titre2:            En bus
+louvre.info.tab3.message2:          Bus n° 21,24,27,39,48,68,69,72,81,95
+louvre.info.tab3.titre3:            Paris l'Open Tour
+louvre.info.tab3.message3:          Arrêt face à la pyramide
+louvre.info.tab3.titre4:            Stations Velib à proximité du musée
+louvre.info.tab3.message4.1:        "n°1015 : 2 place A. Malraux"
+louvre.info.tab3.message4.2:        "n°1023 : 165 rue Saint-Honoré"
+louvre.info.tab3.message4.3:        "n°1014 : 5 rue de l’Echelle"
+louvre.info.tab3.message4.4:        "n°1013 : 186 rue Saint-Honoré"
+louvre.info.tab3.titre5:            En voiture
+louvre.info.tab3.message5:          Un parc de stationnement souterrain est accessible par l'avenue du général Lemonier, tous les jours de 7h00 à 23h00.
+louvre.info.tab3.titre6:            En Batobus
+louvre.info.tab3.message6:          Escale Louvre, quai François Mitterrand
+louvre.info.tab3.titre7:            Depuis l'Aéroport d'Orly
+louvre.info.tab3.message7:          RER C direction Champs de Mars-Tour Eiffel, descendre à Saint-Michel Notre-Dame, marcher jusqu'à Saint Michel, prendre le bus 27 direction Saint Lazare, descendre à Musée du Louvre, en face de la Pyramide.
+louvre.info.tab3.titre8:            Depuis l'Aéroport Charles de Gaulle
+louvre.info.tab3.message8:          RER B direction Massy-Palaiseau, changer à Chatelet les Halles, prendre la ligne 14 direction Saint-Lazare, descendre à Pyramides et marcher jusqu'au musée du Louvre ou bien prendre la ligne 1 et descendre à Palais-Royal / Musée du Louvre.

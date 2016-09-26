@@ -10,7 +10,7 @@ louvre.layout.cgv.link:             Conditions of Use & Sale
 louvre.layout.copyright:            Louvre museum
  
 louvre.accueil.horaire.titre:       Opening hours
-louvre.accueil.horaire.message1:    The museum is opened daily from 9.00 - 18.00, except tuesday.
+louvre.accueil.horaire.message1:    The museum is opened daily from 9.00 to 18.00, except tuesday.
 louvre.accueil.horaire.message2:    (Room closing from 17.30)
 
 louvre.accueil.securite.titre:      Safety regulations
@@ -92,3 +92,47 @@ louvre.contact.titre:               Contact us
 louvre.contact.message:             If you wish to contact us regarding an order or a problem with the web site, please fill in the form bellow, we will contact you as soon as possible.
 louvre.contact.reussite:            Your message has been sent
 louvre.contact.echec:               A problem occured will sending your message, please try again
+
+
+
+
+
+
+
+
+louvre.infos.link:                  Practical information
+louvre.info.tab.label1:             Map
+louvre.info.tab.label2:             Information
+louvre.info.tab.label3:             Transport
+louvre.info.map.titre:              Location of the museum
+
+louvre.info.tab2.titre1:            Address
+louvre.info.tab2.message1:          Musée du Louvre, 75058 Paris - France
+louvre.info.tab2.titre2:            Opening hours
+louvre.info.tab2.message2:          The museum is opened daily from 9.00 to 18.00, except tuesday. Nocturnal until 21.45 on	Wednesday and friday.
+louvre.info.tab2.titre3:            Payment methods
+louvre.info.tab2.message3.1:        Euros payments only.
+louvre.info.tab2.message3.2:        You can make your payment by cash, bank card or "cheque vacance" (ANCV) at the point of sale.
+louvre.info.tab2.message3.3:        "ATM : Bank card only"
+louvre.info.tab2.titre4:            Free access
+louvre.info.tab2.message4:          The subscriber have priority and illimited access to the museum and to the permanent collection.  According to the card those advantages can be extended to the Napoléon hall.
+
+louvre.info.tab3.titre1:            Subway
+louvre.info.tab3.message1:          Line 1 Palais-Royal/musée du Louvre station.
+louvre.info.tab3.titre2:            Bus
+louvre.info.tab3.message2:          Bus n° 21,24,27,39,48,68,69,72,81,95
+louvre.info.tab3.titre3:            Paris l'Open Tour
+louvre.info.tab3.message3:          Bus stop in front of the pyramid.
+louvre.info.tab3.titre4:            Velib station near the museum
+louvre.info.tab3.message4.1:        "n°1015 : 2 place A. Malraux"
+louvre.info.tab3.message4.2:        "n°1023 : 165 rue Saint-Honoré"
+louvre.info.tab3.message4.3:        "n°1014 : 5 rue de l’Echelle"
+louvre.info.tab3.message4.4:        "n°1013 : 186 rue Saint-Honoré"
+louvre.info.tab3.titre5:            Car
+louvre.info.tab3.message5:          An underground parking garage is available at "général Lemonier" avenue, daily from 7.00 to 23.00.
+louvre.info.tab3.titre6:            Batobus
+louvre.info.tab3.message6:          Escale Louvre, quai François Mitterrand.
+louvre.info.tab3.titre7:            Orly airport
+louvre.info.tab3.message7:          RER C direction Champs de Mars-Tour Eiffel, stop at Saint-Michel Notre-Dame, walk to Saint Michel, take the bus 27 direction Saint Lazare, stop at Musée du Louvre, in front of the pyramid.
+louvre.info.tab3.titre8:            Charles de Gaulle airport
+louvre.info.tab3.message8:          RER B direction Massy-Palaiseau, change at Chatelet les Halles, take line 14 direction Saint-Lazare, stop at Pyramides and walk to the museum or you can take the line 1 and stop at Palais-Royal / Musée du Louvre.

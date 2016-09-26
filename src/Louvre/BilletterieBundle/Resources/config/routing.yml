@@ -24,3 +24,8 @@ louvre_billetterie_contact:
     path:   /contact
     defaults:
         _controller: LouvreBilletterieBundle:Billetterie:contact
+        
+louvre_billetterie_infos:
+    path:   /info-pratique
+    defaults:
+        _controller: LouvreBilletterieBundle:Billetterie:info

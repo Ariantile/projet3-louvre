@@ -1,0 +1,99 @@
+{% extends "LouvreBilletterieBundle:Billetterie:index.html.twig" %}
+
+{% block form %}
+{{ parent() }}
+
+<div id="bloc_form_info">
+   
+   {% for message in app.session.flashbag.get('erreur') %}
+        <div class="flash-message">
+            {{ message|trans }}
+        </div>
+    {% endfor %}
+    
+    <div id="tabs">
+    
+        <ul>
+            <li><a href="#fragment-1">{{ 'louvre.info.tab.label1'|trans }}</a></li>
+            <li><a href="#fragment-2">{{ 'louvre.info.tab.label2'|trans }}</a></li>
+            <li><a href="#fragment-3">{{ 'louvre.info.tab.label3'|trans }}</a></li>
+        </ul>
+   
+        <div id="fragment-1">
+       
+            <div class="bloc_form_affichage intForm titremap">
+                <h4>{{ 'louvre.info.map.titre'|trans }}</h4>
+            </div>
+    
+            <div class="bloc_form_affichage">
+                <div  id="map" class="intFormG" style="height: 500px;"></div>
+            </div>
+    
+        </div>
+        
+        <div id="fragment-2">
+           <div class="intForm msgrecover">
+                <h4>{{ 'louvre.info.tab2.titre1'|trans }}</h4>
+                <p>{{ 'louvre.info.tab2.message1'|trans }}</p>
+                <h4>{{ 'louvre.info.tab2.titre2'|trans }}</h4>
+                <p>{{ 'louvre.info.tab2.message2'|trans }}</p>
+                <h4>{{ 'louvre.info.tab2.titre3'|trans }}</h4>
+                <p>
+                    {{ 'louvre.info.tab2.message3.1'|trans }}<br><br>
+                    {{ 'louvre.info.tab2.message3.2'|trans }}<br><br>
+                    {{ 'louvre.info.tab2.message3.3'|trans }}
+                </p>
+                <h4>{{ 'louvre.info.tab2.titre4'|trans }}</h4>
+                <p>
+                    {{ 'louvre.info.tab2.message4'|trans }}
+                </p>
+            </div>
+        </div>
+        
+        <div id="fragment-3">
+            <div class="intForm msgrecover">
+                <h4>{{ 'louvre.info.tab3.titre1'|trans }}</h4>
+                <p>{{ 'louvre.info.tab3.message1'|trans }}</p>
+                    
+                <h4>{{ 'louvre.info.tab3.titre2'|trans }}</h4>
+                <p>{{ 'louvre.info.tab3.message2'|trans }}</p>
+                    
+                <h4>{{ 'louvre.info.tab3.titre3'|trans }}</h4>
+                <p>{{ 'louvre.info.tab3.message3'|trans }}</p>
+                    
+                <h4>{{ 'louvre.info.tab3.titre4'|trans }}</h4>
+                <p>
+                    {{ 'louvre.info.tab3.message4.1'|trans }}<br>
+                    {{ 'louvre.info.tab3.message4.2'|trans }}<br>
+                    {{ 'louvre.info.tab3.message4.3'|trans }}<br>
+                    {{ 'louvre.info.tab3.message4.4'|trans }}
+                </p>
+                    
+                <h4>{{ 'louvre.info.tab3.titre5'|trans }}</h4>
+                <p>{{ 'louvre.info.tab3.message5'|trans }}</p>
+                    
+                <h4>{{ 'louvre.info.tab3.titre6'|trans }}</h4>
+                <p>{{ 'louvre.info.tab3.message6'|trans }}</p>
+                    
+                <h4>{{ 'louvre.info.tab3.titre7'|trans }}</h4>
+                <p>{{ 'louvre.info.tab3.message7'|trans }}</p>
+                 
+                <h4>{{ 'louvre.info.tab3.titre8'|trans }}</h4>
+                <p>{{ 'louvre.info.tab3.message8'|trans }}</p>
+            </div>
+        </div>
+    </div>
+</div>        
+
+<script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 48.860294, lng: 2.338629},
+          scrollwheel: true,
+          zoom: 15
+        });
+      }
+
+</script>
+
+{% endblock %}

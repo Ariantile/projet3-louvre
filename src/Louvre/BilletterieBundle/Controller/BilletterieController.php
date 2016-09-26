@@ -132,4 +132,9 @@ class BilletterieController extends Controller
         return $this->render('LouvreBilletterieBundle:Billetterie:contact.html.twig', array(
             'form' => $form->createView() ));
     }
+    
+    public function infoAction(Request $request)
+    {
+        return $this->render('LouvreBilletterieBundle:Billetterie:infoprat.html.twig');
+    }
 }
