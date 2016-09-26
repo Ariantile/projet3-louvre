@@ -283,6 +283,18 @@ button:disabled
     }
 }
 
+#bloc_form_info
+{
+    width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+    
+    button:hover 
+    {
+        background-color: @boutonHover;    
+    }
+}
+
 #bloc_choix
 {
     display: none;    
@@ -324,10 +336,28 @@ button:disabled
     border-radius: 5px;
 }
 
+.bloc_form_affichage
+{
+    .shadow;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid @noir;
+    border-radius: 5px;
+}
+
 .intForm
 {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 15px;    
+    border: 1px solid @noir;
+    border-radius: 5px;
+}
+
+.intFormG
+{
+    background-color: rgba(255, 255, 255, 0.9);    
     border: 1px solid @noir;
     border-radius: 5px;
 }
@@ -416,6 +446,27 @@ button:disabled
 #contact_message
 {
     resize: none;
+}
+
+#tabs
+{
+    text-align: justify;
+    .shadowMin
+}
+
+.titremap
+{
+    text-align: center;
+}
+
+.ui-widget-content
+{
+    
+}
+
+.ui-widget-header
+{
+    background: rgba(0, 0, 0, 0.9) !important; 
 }
 
 /*-----------------------------------------------
@@ -620,6 +671,15 @@ footer
     
 }
 
+@media (max-width: 810px) {
+    
+    #bloc_form_info
+    {
+        width: 580px;
+    }
+
+}
+
 @media (max-width: 767px) {
     
     #headAccueil
@@ -702,6 +762,11 @@ footer
         margin-left:auto;
         margin-right:auto;
     }
+    
+    #bloc_form_info
+    {
+        width: 400px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -723,6 +788,11 @@ footer
     #bloc_form_paiement
     {
         width: 340px; 
+    }
+    
+    #bloc_form_info
+    {
+        width: 340px;
     }
     
     #panier

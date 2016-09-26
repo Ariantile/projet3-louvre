@@ -93,18 +93,11 @@ louvre.contact.message:             If you wish to contact us regarding an order
 louvre.contact.reussite:            Your message has been sent
 louvre.contact.echec:               A problem occured will sending your message, please try again
 
-
-
-
-
-
-
-
 louvre.infos.link:                  Practical information
 louvre.info.tab.label1:             Map
 louvre.info.tab.label2:             Information
 louvre.info.tab.label3:             Transport
-louvre.info.map.titre:              Location of the museum
+louvre.info.map.titre:              Museum
 
 louvre.info.tab2.titre1:            Address
 louvre.info.tab2.message1:          Musée du Louvre, 75058 Paris - France
