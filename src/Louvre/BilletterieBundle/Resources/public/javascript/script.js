@@ -51,6 +51,8 @@ $(function () {
         $checkDate,
         $checkTarif,
         $checkCourriel,
+        $checkQte,
+        $checkType,
         $dateValide,
         $tarifReduit,
         $nbBillet,
@@ -89,7 +91,17 @@ $(function () {
         $tarifDescEnfEn             = 'Child rate, from 4 to 11 years old',
         $tarifDescNmEn              = 'Normal rate, from 12 to 59 years old',
         $tarifDescSeEn              = 'Senior rate, from 60 years old',
-        $tarifDescInvEn             = 'Invalid date of birth';
+        $tarifDescInvEn             = 'Invalid date of birth',
+        
+        $messageh18Fr               = '<p class="messageErreur">Heure de visite dépassée pour ce jour</p>',
+        $messageh14Fr               = '<p class="messageErreur">Billet journée indisponible après 14h</p>',
+        $messageTypeFr              = '<p class="messageErreur">Veuillez selectionner un type de billet</p>',
+        $messageQteFr               = '<p class="messageErreur">Nombre de billet par commande : entre 1 et 9</p>',
+        
+        $messageh18En               = '<p class="messageErreur">Visit time passed for this day</p>',
+        $messageh14En               = '<p class="messageErreur">Day ticket unavailable after 14.00</p>',
+        $messageTypeEn              = '<p class="messageErreur">Please select a ticket type</p>',
+        $messageQteEn               = '<p class="messageErreur">Number of ticket : between 1 and 9</p>';
     
 
     /**********************************************************************************************
@@ -427,6 +439,117 @@ $(function () {
         }
     }
     
+    function testDateReservation(date, quantite, radioJ , radioD) {
+        
+        var $messageType;
+        var $messageDate;
+        var $messageQte;
+        
+        if (date.val().length < 10 || date.val() === '' || date.val() === null || !regexDate.test(date.val())) {
+            
+            if ($locale === 'FR') {
+                $messageDate = $messageDateFr;
+            } if ($locale === 'EN') {
+                $messageDate = $messageDateEn;
+            }
+            
+            if (date.hasClass('champVide')) {
+                removeErreurs(date);
+            }
+            addErreurs(date, $messageDate);
+            $checkDate = 1;
+        
+        } else if (($heureConnexion >= 18) && ($dateConnexion === $('.dateReserv').val())) {
+            
+            if ($locale === 'FR') {
+                $messageDate = $messageh18Fr;
+            } if ($locale === 'EN') {
+                $messageDate = $messageh18En;
+            }
+            
+            if (date.hasClass('champVide')) {
+                removeErreurs(date);
+            }
+            addErreurs(date, $messageDate);
+            $checkDate = 1;
+        
+        } else if (($heureConnexion >= 14) && ($dateConnexion === $('.dateReserv').val()) && (radioJ.is(':checked'))) {
+            
+            if ($locale === 'FR') {
+                $messageDate = $messageh14Fr;
+            } if ($locale === 'EN') {
+                $messageDate = $messageh14En;
+            }
+            
+            if (date.hasClass('champVide')) {
+                removeErreurs(date);
+            }
+            addErreurs(date, $messageDate);
+            $checkDate = 1;
+        
+        } else {
+            
+            if (date.hasClass('champVide')) {
+            
+            removeErreurs(date);
+            $checkDate = 0;
+                
+            }
+            $checkDate = 0;
+        } 
+        
+        if ( (radioJ.is(':not(:checked)')) && (radioD.is(':not(:checked)')) ) {
+            
+            $checkType = 1;
+            
+            if ($locale === 'FR'){
+                $messageType = $messageTypeFr;
+            } else if ($locale === 'EN'){
+                $messageType = $messageTypeEn;
+            }
+            
+            if (!$('#commande_demiJournee').children().last().hasClass('messageErreur')) {
+                
+                $('#commande_demiJournee').append($messageType);
+                
+            }
+            
+        } else {
+            
+            console.log($checkType);
+            
+            if ($('#commande_demiJournee').children().last().hasClass('messageErreur')) {
+                
+                $('#commande_demiJournee').children().last().remove();
+                $checkType = 0;
+                
+            }
+            
+            $checkType = 0;
+        }
+        
+        if ( quantite.val() <= 0 || quantite.val() > 9 || quantite.val() === null) {
+            
+            if ($locale === 'FR'){
+                $messageQte = $messageQteFr;
+            } else if ($locale === 'EN'){
+                $messageQte = $messageQteEn;
+            }
+            
+            addErreurs(quantite, $messageQte);
+            
+            $checkQte = 1;  
+            console.log($checkQte);
+
+        } else {
+            
+            removeErreurs(quantite, $messageQte);
+            $checkQte = 0;
+            
+        }
+
+    }
+        
     function deffTarif (date) {
         
         var $dateVisite = $('.dateReserv').val().split('/'),
@@ -557,13 +680,8 @@ $(function () {
     *********************** PARAMETRES DE DEPART **************************************************
     **********************************************************************************************/
 
-    $('#addBillet').prop('disabled', true);
-    $('#supBillet').prop('disabled', true);
-    $('#subForm').prop('disabled', true);
+    
     $('#totalPanier').val(0);
-    $('#commande_demiJournee_0').attr('checked', false).prop('disabled', true);
-    $('#commande_demiJournee_1').attr('checked', false).prop('disabled', true);
-    $('#next1').prop('disabled', true);
     checkDateTap($('.dateReserv'));
     checkDateTap($('.dateFacturation'));
     $('#tabs').tabs();
@@ -599,8 +717,19 @@ $(function () {
     });
         
     $('#next1').click(function () {
-
+        
         if (($indexEtape === 0) && ($validationChoix === 0)) {
+            
+            
+            
+            testDateReservation($('#commande_dateReservation'), 
+                                $('#commande_qte'), 
+                                $('#commande_demiJournee_0'),
+                                $('#commande_demiJournee_1'));
+            
+            if ($checkDate === 1 || $checkQte === 1 || $checkType === 1) {
+                return false;
+            }
             
             $indexEtape = 1;
             
@@ -918,11 +1047,8 @@ $(function () {
     $('.dateReserv').change(function () {
             
         $('#dateVisite').text($('.dateReserv').val());
-        $('#next1').prop('disabled', true);
             
         if (($heureConnexion >= 18) && ($dateConnexion === $('.dateReserv').val())) {
-            $('#commande_demiJournee_0').attr('checked', false).prop('disabled', true);
-            $('#commande_demiJournee_1').attr('checked', false).prop('disabled', true);
             if ($locale === 'FR') {
                 $('#dateVisite').text('Heure de visite dépassée pour cette date').css('color', 'red');
                 $('#typeBillet').text('Aucun type de billet selectionné');
@@ -932,8 +1058,6 @@ $(function () {
             }
             $('#next1').prop('disabled', true);
         } else if (($heureConnexion >= 14) && ($dateConnexion === $('.dateReserv').val())) {
-            $('#commande_demiJournee_0').attr('checked', false).prop('disabled', true);
-            $('#commande_demiJournee_1').attr('checked', false).prop('disabled', false);
             if ($locale === 'FR') {
                 $('#typeBillet').text('Demi-journée');
             } else if ($locale === 'EN') {
@@ -941,8 +1065,6 @@ $(function () {
             }
             $('#dateVisite').css('color', 'black');
         } else {
-            $('#commande_demiJournee_0').attr('checked', false).prop('disabled', false);
-            $('#commande_demiJournee_1').attr('checked', false).prop('disabled', false);
             if ($locale === 'FR') {
                 $('#typeBillet').text('Aucun type de billet selectionné');  
             } else if ($locale === 'EN') {

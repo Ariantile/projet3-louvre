@@ -29,8 +29,8 @@ class BilletterieController extends Controller
                 $session->getFlashBag()->add('erreur', 'louvre.flash.erreur.billet');
             } else {
                 $demiJournee = $commande->getDemiJournee();
-                $creationCommade = $this->container->get('louvre_commande.create');
-                $creationCommade->createCommande($commande, $demiJournee);
+                $creationCommande = $this->container->get('louvre_commande.create');
+                $creationCommande->createCommande($commande, $demiJournee);
                 $session->set('idCommande'  , $commande->getId());
                 $session->set('demiJournee' , $commande->getDemiJournee());
                 return $this->redirectToRoute('louvre_billetterie_paiement');

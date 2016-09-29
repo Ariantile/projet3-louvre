@@ -5,7 +5,7 @@ namespace Louvre\BilletterieBundle\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ActionControllerTest extends WebTestCase
-{
+{   
     /**
      * @dataProvider urlProvider
      */
@@ -20,10 +20,12 @@ class ActionControllerTest extends WebTestCase
     public function urlProvider()
     {
         return array(
-            array('/fr/'),
             array('/fr/recover'),
-            array('/en/'),
-            array('/en/recover')
+            array('/fr/contact'),
+            array('/fr/info-pratique'),
+            array('/en/recover'),
+            array('/en/contact'),
+            array('/en/info-pratique')
         );
     }
     
@@ -38,7 +40,7 @@ class ActionControllerTest extends WebTestCase
         $this->assertFalse($client->getResponse()->isSuccessful());
         $this->assertTrue(
             $client->getResponse()->isRedirect('/fr/' || '/en/'),
-            'response is a redirect to /fr/ ou /en/'
+            'response is a redirect to /fr/ or /en/'
         );
     }
 
@@ -52,21 +54,55 @@ class ActionControllerTest extends WebTestCase
         );
     }
     
-    public function testRecover()
-    {
+    public function testContactSubmit()
+    {   
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/fr/recover');
-
-        $this->assertEquals(1, $crawler->filter('h2:contains("Récupération de billet")')->count());
-
+        $crawler = $client->request('GET', '/fr/contact');
+        
+        $this->assertEquals(1, $crawler->filter('h2:contains("Contactez-nous")')->count());
+        
         $form = $crawler->selectButton('Envoyer')->form();
-
-        $form['recherche[courriel]'] = 'email@email.com';
-
+        
+        $form['contact[nom]'] = 'unnom';
+        $form['contact[titre]'] = 'le titre';
+        $form['contact[message]'] = 'le message';
+        $form['contact[email]'] = 'adresse@mail.com';
+        
+        $data = $form->getPhpValues();
+        
         $crawler = $client->submit($form);
-
-        $this->assertEquals(1, $crawler->filter('span:contains("Vous devez cocher la case "Je ne suis pas un robot"")')->count());
+        
+        $expected = array('contact' => array('nom' => 'unnom',
+                                             'titre' => 'le titre',
+                                             'message' => 'le message',
+                                             'email' => 'adresse@mail.com',
+                                             'Envoyer' => ''
+        ));
+        
+        $this->assertEquals($expected, $data);
     }
     
+    public function testRecoverSubmit()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/fr/recover');
+        
+        $this->assertEquals(1, $crawler->filter('h2:contains("Récupération de billet")')->count());
+        
+        $form = $crawler->selectButton('Envoyer')->form(array(
+            'recherche[courriel]' => 'adresse@mail.com' 
+        ));
+        
+        $data = $form->getPhpValues();
+        
+        $crawler = $client->submit($form);
+        
+        $expected = array('recherche' => array('courriel' => 'adresse@mail.com',
+                                               'recherche' => ''
+        ));
+        
+        $this->assertEquals($expected, $data);
+            
+    }
 }

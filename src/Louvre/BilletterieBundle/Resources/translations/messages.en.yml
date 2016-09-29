@@ -48,6 +48,7 @@ louvre.accueil.courriel.error:      Both your email addresses must be identical.
 
 louvre.accueil.validation.titre_f:  Billing information
 louvre.accueil.validation.titre_r:  Your order
+louvre.accueil.validation.titre_b:  Your ticket(s)
 
 louvre.paiement.label.nom:          Last and first name
 louvre.paiement.label.type:         Type of ticket

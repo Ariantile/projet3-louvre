@@ -48,6 +48,7 @@ louvre.accueil.courriel.error:      Les deux adresses courriel doivent être ide
 
 louvre.accueil.validation.titre_f:  Facturation
 louvre.accueil.validation.titre_r:  Récapitulatif de la commande
+louvre.accueil.validation.titre_b:  Récapitulatif des billets
 
 louvre.paiement.label.nom:          Nom et prenom
 louvre.paiement.label.type:         Type de billet
@@ -97,7 +98,7 @@ louvre.contact.echec:               Il y a eu un problème lors de l'envoi du fo
 
 louvre.infos.link:                  Infos pratiques
 louvre.info.tab.label1:             Carte
-louvre.info.tab.label2:             Informations
+louvre.info.tab.label2:             Information
 louvre.info.tab.label3:             Transports
 louvre.info.map.titre:              Emplacement du musée du Louvre
 
